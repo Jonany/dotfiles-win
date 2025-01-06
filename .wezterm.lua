@@ -30,7 +30,18 @@ else
   config.color_scheme = 'Tokyo Night Storm'
 end
 
-config.default_prog = { 'C:/Program Files/PowerShell/7/pwsh.exe' }
+config.default_prog = { 'C:/Program Files/PowerShell/7-preview/pwsh.exe' }
+config.default_cwd = "c:/development"
+config.font_size = 12.0
+
+local act = wezterm.action
+
+config.keys = {
+  { key = 'UpArrow',   mods = 'SHIFT', action = act.ScrollByLine(-1) },
+  { key = 'DownArrow', mods = 'SHIFT', action = act.ScrollByLine(1) },
+  { key = 'PageUp',    mods = 'SHIFT', action = act.ScrollByPage(-0.75) },
+  { key = 'PageDown',  mods = 'SHIFT', action = act.ScrollByPage(0.75) },
+}
 
 -- and finally, return the configuration to wezterm
 return config
