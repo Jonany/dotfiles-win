@@ -11,8 +11,15 @@ $env:USR_BIN = "c:\development\usr-bin"
 # Add to PATH
 $env:PATH += ";$env:USR_BIN"
 $env:PATH += ";$env:USR_BIN\cmake\bin"
-$env:PATH += ";$env:USR_BIN\lua-language-server"
+$env:PATH += ";$env:USR_BIN\lua-language-server\bin"
 
+# Fast Node Manager setup
+try {
+    fnm env --use-on-cd --shell powershell | Out-String | Invoke-Expression
+}
+catch {
+    Write-Host "Unable to setup fnm env."
+}
 # Source autocomplete configs provided by various tools
 #   Since these aren't specific to my config, I've chosed to
 #   put them in my 'usr-bin' directory.
