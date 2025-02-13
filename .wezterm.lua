@@ -6,6 +6,7 @@ local config = wezterm.config_builder()
 
 config.use_fancy_tab_bar = false
 config.tab_max_width = 32
+config.default_cursor_style = 'SteadyBar'
 
 -- wezterm.gui is not available to the mux server, so take care to
 -- do something reasonable when this config is evaluated by the mux
