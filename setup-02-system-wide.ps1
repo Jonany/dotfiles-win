@@ -17,4 +17,3 @@ $shell = New-Object -ComObject WScript.Shell
 $shortcut = $shell.CreateShortcut($lnkPath)
 $shortcut.Arguments = "--config-file `"$env:XDG_CONFIG_HOME\wezterm.lua`""
 $shortcut.Save()
-
