@@ -14,6 +14,9 @@ function gadd { git add @args && gstat }
 function gdiff { git diff @args }
 function gstat { git status }
 
+# Lazygit
+function lg { lazygit -ucf "$env:XDG_CONFIG_HOME/lazygit.yml" }
+
 # etc
 function cl { cd @args && ls }
 function unzip { Expand-Archive @args }

@@ -5,7 +5,8 @@ function Invoke-Starship-PreCommand {
 }
 
 # Set ENV variables
-$env:STARSHIP_CONFIG = "$PSScriptRoot\starship.toml"
+$env:XDG_CONFIG_HOME = "$PSScriptRoot\config"
+$env:STARSHIP_CONFIG = "$env:XDG_CONFIG_HOME\starship.toml"
 $env:USR_BIN = "c:\development\usr-bin"
 
 # Add to PATH
