@@ -15,6 +15,6 @@ Write-Host SETUP:: Setting up WezTerm shortcut
 $lnkPath = "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\WezTerm.lnk"
 $shell = New-Object -ComObject WScript.Shell
 $shortcut = $shell.CreateShortcut($lnkPath)
-$shortcut.Arguments = '--config-file "C:\development\etc\dotfiles-win\wezterm.lua"'
+$shortcut.Arguments = "--config-file `"$env:XDG_CONFIG_HOME\wezterm.lua`""
 $shortcut.Save()
 
