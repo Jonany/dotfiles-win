@@ -1,0 +1,10 @@
+git:
+  mainBranches:
+    - master
+    - main
+    - dev
+
+  parseEmoji: true
+
+os:
+  editPreset: 'nvim'
