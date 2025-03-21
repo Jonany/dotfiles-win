@@ -1,0 +1,6 @@
+[opener]
+edit = [
+	{ run = 'pwsh -c nvim -- %*',    block = true, desc = "nvim",         for = "windows" },
+	{ run = 'pwsh -c nvim -- -w %*', block = true, desc = "nvim (block)", for = "windows" },
+]
+
