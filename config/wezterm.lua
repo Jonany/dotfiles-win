@@ -10,10 +10,9 @@ config.default_cursor_style = 'SteadyBar'
 
 -- wezterm.gui is not available to the mux server, so take care to
 -- do something reasonable when this config is evaluated by the mux
+config.color_scheme = 'Tokyo Night Storm'
 if wezterm.gui then
-  if wezterm.gui.get_appearance():find 'Dark' then
-    config.color_scheme = 'Tokyo Night Storm'
-  else
+  if wezterm.gui.get_appearance():find 'Light' then
     config.color_scheme = 'Tokyo Night Day'
 
     local bg_color = '#E1E2ED'
@@ -27,8 +26,6 @@ if wezterm.gui then
       },
     }
   end
-else
-  config.color_scheme = 'Tokyo Night Storm'
 end
 
 config.default_prog = { 'C:/Program Files/PowerShell/7-preview/pwsh.exe' }
@@ -47,7 +44,7 @@ config.keys = {
     mods = 'CTRL|SHIFT',
     action = act.PromptInputLine {
       description = 'Enter new name for tab',
-      action = wezterm.action_callback(function(window, pane, line)
+      action = wezterm.action_callback(function(window, _, line)
         -- line will be `nil` if they hit escape without entering anything
         -- An empty string if they just hit enter
         -- Or the actual line of text they wrote

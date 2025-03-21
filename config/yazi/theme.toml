@@ -1,0 +1,11 @@
+[flavor]
+dark = "tokyonight-night"
+light = "tokyonight-day"
+
+[manager]
+# Hovered
+hovered         = { reversed = true }
+preview_hovered = { underline = true }
+
+# Tab
+tab_active = { reversed = true }
