@@ -8,3 +8,6 @@ git:
 
 os:
   editPreset: 'nvim'
+
+gui:
+  sidePanelWidth: 0.3333

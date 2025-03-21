@@ -15,7 +15,7 @@ function gdiff { git diff @args }
 function gstat { git status }
 
 # Lazygit
-function lg { lazygit -ucf "$env:XDG_CONFIG_HOME/lazygit.yml" }
+function lg { lazygit -ucf "$env:XDG_CONFIG_HOME/lazygit/config.yml" }
 
 # etc
 function cl { cd @args && ls }
