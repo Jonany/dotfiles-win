@@ -4,37 +4,15 @@
 # Move the directory to the second line
 format = """$directory$git_status $git_branch
 $character"""
-# Tokyonight style prompt
-# format = """
-# [░▒▓](#a3aed2)\
-# $directory\
-# [](fg:#769ff0 bg:#394260)\
-# $git_status\
-# $git_branch\
-# [](fg:#394260 bg:#212736)\
-# $nodejs\
-# $rust\
-# $golang\
-# $php\
-# [](fg:#212736 bg:#1d2230)\
-# $time\
-# [ ](fg:#1d2230)\
-# \n$character"""
-
-# right_format = """"""
 
 # Inserts a blank line between shell prompts
-add_newline = true
-
-[battery]
-disabled = true
+add_newline = false # 2025/03/27: Pretty sure this was causing me some issues when pasting stuff so I disabled it.
 
 [character]
 success_symbol = '->(bold green)'
 error_symbol = '->(bold red)'
 
 [directory]
-# style = 'fg:#e3e5e5 bg:#769ff0'
 fish_style_pwd_dir_length = 1
 truncation_length = 1
 truncation_symbol = '/'
@@ -46,27 +24,17 @@ symbol = '.NET '
 version_format = '${major}.${minor}'
 
 [git_branch]
-# truncation_length = 8
 symbol = ''
 format = '[$branch(:$remote_branch)]($style)'
-# style = 'bg:#394260'
 
 [git_status]
-# format = '([\[$ahead_behind\]$conflicted$deleted$renamed$modified$staged$stashed$untracked]($style)) '
 format = '[$ahead_behind]($style)'
-# style = 'bg:#394260'
 
-# $ahead_behind
 ahead = '⇡${count}'
 diverged = '⇕⇡${ahead_count}⇣${behind_count}'
 behind = '⇣${count}'
 up_to_date = '[✓](green)'
-# ahead = '$count ahead'
-# behind = '$count behind'
-# diverged = '[diverged:$count](bold red)'
-# up_to_date = '[up to date](green)'
 
-# $all_status
 conflicted = '[\[$count Conflicted\]](bold red) ~ '
 deleted = '\[$count Deleted\]'
 renamed = '\[$count Renamed\]'
