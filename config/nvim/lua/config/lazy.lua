@@ -15,25 +15,10 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
--- Make sure to setup `mapleader` and `maplocalleader` before
--- loading lazy.nvim so that mappings are correct.
--- This is also a good place to setup other settings (vim.opt)
-vim.g.mapleader = " "
-vim.g.maplocalleader = "\\"
---vim.keymap.set('n', '<leader>f', vim.cmd.Ex)
-vim.g.guicursor = "n-v-c-sm:block,i-ci-ve:ver25-Cursor,r-cr-o:hor20"
-
--- Default options for all filetypes. See after/ftplugins for specific filetype settings.
-vim.opt.shiftwidth = 4
-vim.opt.number = true
-vim.opt.relativenumber = true
-
 -- Setup lazy.nvim
 require("lazy").setup({
   spec = {
     -- import your plugins
-    { import = "config.plugins" },
+    { import = "plugins" },
   },
 })
-
-require 'nvim-treesitter.install'.prefer_git = false
