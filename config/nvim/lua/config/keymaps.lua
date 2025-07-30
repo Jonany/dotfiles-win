@@ -10,3 +10,5 @@ vim.keymap.set("n", "<leader>x", ":.lua<CR>")
 -- Run the current selection
 vim.keymap.set("v", "<leader>x", ":lua<CR>")
 
+-- Rename symbol under cursor
+vim.keymap.set("n", "<leader>r", vim.lsp.buf.rename)

@@ -1,5 +1,8 @@
 Set-Alias -Name ls -Value lsd
 
+# Source miscellaneous pwsh functions
+gci "$PSScriptRoot/pwsh" -fi *.ps1 | % { . $_.FullName }
+
 # Docker
 function dps { docker ps --format '{{json .}}' | ConvertFrom-Json | sort Names | ft Names, Status, Ports, Image }
 
@@ -20,6 +23,17 @@ function lg { lazygit -ucf "$env:XDG_CONFIG_HOME/lazygit/config.yml" }
 # etc
 function cl { cd @args && ls }
 function unzip { Expand-Archive @args }
+#function rmrf { rm -R -fo @args }
+#function cleantemp { Get-ChildItem -Path @args -Recurse -Directory -Filter "obj","bin" | Remove-Item -Recurse -Force }
+function grep {
+    $count = @($input).Count
+    $input.Reset()
 
-# Source miscellaneous pwsh functions
-gci "$PSScriptRoot/pwsh" -fi *.ps1 | % { . $_.FullName }
+    if ($count) {
+        $input | rg.exe --hidden $args
+    }
+    else {
+        rg.exe --hidden $args
+    }
+}
+

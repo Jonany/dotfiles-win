@@ -5,9 +5,11 @@ function Invoke-Starship-PreCommand {
 }
 
 # Set ENV variables
+## NOTE: neovim picks up on this and will use it as its config path.
 $env:XDG_CONFIG_HOME = "$PSScriptRoot\config"
 $env:STARSHIP_CONFIG = "$env:XDG_CONFIG_HOME\starship.toml"
 $env:EDITOR = "nvim"
+#$env:SHELL = "pwsh"
 $env:YAZI_CONFIG_HOME = "$env:XDG_CONFIG_HOME\yazi"
 $env:YAZI_FILE_ONE = "C:\Program Files\Git\usr\bin\file.exe"
 $env:USR_BIN = "c:\development\usr-bin"

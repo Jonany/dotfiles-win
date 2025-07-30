@@ -6,7 +6,7 @@ format = """$directory$git_status $git_branch
 $character"""
 
 # Inserts a blank line between shell prompts
-add_newline = false # 2025/03/27: Pretty sure this was causing me some issues when pasting stuff so I disabled it.
+add_newline = true
 
 [character]
 success_symbol = '->(bold green)'
