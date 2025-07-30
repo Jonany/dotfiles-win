@@ -10,8 +10,6 @@ winget install --id BurntSushi.ripgrep.MSVC
 winget install --id junegunn.fzf
 winget install --id ajeetdsouza.zoxide
 
-Write-Host SETUP:: Installing or updating Starship.Starship
-winget install --id Starship.Starship
 Write-Host SETUP:: Installing or updating 'uutils.coreutils'
 winget install --id uutils.coreutils
 
