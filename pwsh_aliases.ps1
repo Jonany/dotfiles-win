@@ -1,3 +1,4 @@
+Set-Alias -Name find -Value fd
 Set-Alias -Name ls -Value lsd
 
 # Source miscellaneous pwsh functions
@@ -36,4 +37,7 @@ function grep {
         rg.exe --hidden $args
     }
 }
+function pwd-custom { (Get-Location).Path }
+Set-Alias -Name pwd -Value pwd-custom
+function pwd-clip { pwd | Set-Clipboard }
 
