@@ -13,3 +13,4 @@ zoxide, https://github.com/ajeetdsouza/zoxide/releases, zoxide-0.9.8-x86_64-pc-w
 uutils, https://github.com/uutils/coreutils/releases, coreutils-0.1.0-x86_64-pc-windows-msvc.zip
 ffmpeg, https://www.gyan.dev/ffmpeg/builds/ffmpeg-git-full.7z
 less, https://github.com/jftuga/less-Windows/releases, less-x86.zip. x64 version is currently being blocked by ZScaler.
+csharp_ls, https://github.com/razzmatazz/csharp-language-server, `dotnet tool install --global csharp-ls`
