@@ -1,4 +1,4 @@
-# Custom Functions
+﻿# Custom Functions
 ## Configure Starship to set the window title to the name of the current directory
 function Invoke-Starship-PreCommand {
     $Host.UI.RawUI.WindowTitle = "$(Split-Path -Path (Get-Location) -Leaf)"
@@ -13,6 +13,8 @@ $env:EDITOR = "nvim"
 $env:YAZI_CONFIG_HOME = "$env:XDG_CONFIG_HOME\yazi"
 $env:YAZI_FILE_ONE = "C:\Program Files\Git\usr\bin\file.exe"
 $env:USR_BIN = "c:\development\usr-bin"
+$env:DOTNET_CLI_TELEMETRY_OPTOUT = '1'
+$env:POWERSHELL_TELEMETRY_OPTOUT = '1'
 
 # Add to PATH
 $env:PATH += ";$env:USR_BIN"
