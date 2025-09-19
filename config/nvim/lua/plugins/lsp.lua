@@ -1,4 +1,4 @@
-return {
+﻿return {
   {
     "neovim/nvim-lspconfig",
     dependencies = {
@@ -16,10 +16,15 @@ return {
     },
     config = function()
       require("lspconfig").lua_ls.setup {}
+      -- 2025-09-19: Seems to working well enough. I've been able to C# work in nvim the last few days.
+      require("lspconfig").csharp_ls.setup({
+        cmd = { 'C:/Users/Jonathan.Rigsby/.dotnet/tools/csharp-ls.exe' }
+      })
       -- Setup format on save
       vim.api.nvim_create_autocmd('LspAttach', {
         callback = function(args)
           local client = vim.lsp.get_client_by_id(args.data.client_id)
+          -- Auto formatting
           if client.supports_method('textDocument/formatting', 0) then
             vim.api.nvim_create_autocmd('BufWritePre', {
               buffer = args.buf,
