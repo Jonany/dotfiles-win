@@ -1,4 +1,4 @@
--- Pull in the wezterm API
+﻿-- Pull in the wezterm API
 local wezterm = require 'wezterm'
 
 -- This will hold the configuration.
@@ -28,7 +28,7 @@ if wezterm.gui then
   end
 end
 
-config.default_prog = { 'C:/Program Files/PowerShell/7/pwsh.exe' }
+config.default_prog = { 'C:/Program Files/PowerShell/7/pwsh.exe', '-nologo' }
 config.default_cwd = "c:/development"
 config.font_size = 12.0
 

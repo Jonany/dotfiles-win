@@ -1,4 +1,39 @@
-﻿$env:XDG_CONFIG_HOME = "c:\development\etc\dotfiles-win\config"
+﻿function prompt {
+    $segments = $ExecutionContext.SessionState.Path.CurrentLocation -split '\\'
+    $shortSegments = @()
+    for ($i = 0; $i -lt $segments.Count; $i++) {
+        if ($i -lt $segments.Count - 1) {
+            if ($segments[$i] -eq 'C:') {
+                $shortSegments += 'c'
+                #Write-Host -NoNewline 'c/'
+            }
+            else {
+                $shortSegments += "$($segments[$i][0])"
+                #Write-Host -NoNewline "$($segments[$i][0])/"
+            }
+        }
+        else {
+            $shortSegments += "$($segments[$i])"
+            #Write-Host "$($segments[$i])"
+        }
+    }
+    #Write-Host -NoNewline "-> "
+    $shortPath = $shortSegments -join '/'
+
+    $gitBranch = ''
+    try {
+        $branch = git rev-parse --abbrev-ref HEAD 2>$null
+        if ($branch) {
+            $gitBranch = " ($branch)"
+        }
+    } catch {}
+
+    $host.UI.RawUI.WindowTitle = Split-Path -Leaf ($ExecutionContext.SessionState.Path.CurrentLocation)
+
+    return "`n$shortPath$gitBranch`n-> ".ToLower()
+}
+
+$env:XDG_CONFIG_HOME = "c:\development\etc\dotfiles-win\config"
 $env:STARSHIP_CONFIG = "$env:XDG_CONFIG_HOME\starship.toml"
 $env:EDITOR = "nvim"
 $env:YAZI_CONFIG_HOME = "$env:XDG_CONFIG_HOME\yazi"
