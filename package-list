@@ -1,17 +1,19 @@
 ﻿7zip, https://www.7-zip.org/
-Git, https://git-scm.com/downloads/win, "Git for Windows/x64 Setup"
-Golang, https://go.dev/dl/, windows-amd64.msi
-ImageMagick, https://github.com/ImageMagick/ImageMagick/releases, ImageMagick.Q16-HDRI.msixbundle
-Starship, https://github.com/starship/starship/releases/
-Yazi, https://github.com/sxyazi/yazi/releases, yazi-x86_64-pc-windows-msvc.zip
 csharp_ls, https://github.com/razzmatazz/csharp-language-server, `dotnet tool install --global csharp-ls`
-fd, https://github.com/sharkdp/fd/releases, fd-v10.2.0-x86_64-pc-windows-gnu.zip
+fd, https://github.com/sharkdp/fd/releases, fd-v10.2.0-x86_64-pc-windows-msvc.zip
 ffmpeg, https://www.gyan.dev/ffmpeg/builds/ffmpeg-git-full.7z
 fzf, https://github.com/junegunn/fzf/releases, fzf-0.65.1-windows_amd64.zip
+git, https://git-scm.com/downloads/win, "Git for Windows/x64 Setup"
+golang, https://go.dev/dl/, windows-amd64.msi
+image-magick, https://github.com/ImageMagick/ImageMagick/releases, ImageMagick.Q16-HDRI.msixbundle
 jq, https://github.com/jqlang/jq/releases, jq-windows-amd64.exe
 less, https://github.com/jftuga/less-Windows/releases, less-x86.zip. x64 version is currently being blocked by ZScaler.
 lsd, https://github.com/lsd-rs/lsd/releases, lsd-v1.1.5-x86_64-pc-windows-msvc.zip
-rg, https://github.com/BurntSushi/ripgrep/releases, ripgrep-14.1.1-x86_64-pc-windows-gnu.zip
+neovim, https://github.com/neovim/neovim/releases/latest, nvim-win64.msi
+rg, https://github.com/BurntSushi/ripgrep/releases, ripgrep-14.1.1-x86_64-pc-windows-msvc.zip
+starship, https://github.com/starship/starship/releases/, starship-x86_64-pc-windows-msvc.msi (or maybe zip).
+sublime-text, https://www.sublimetext.com/download_thanks?target=win-x64
 uutils, https://github.com/uutils/coreutils/releases, coreutils-0.1.0-x86_64-pc-windows-msvc.zip
 wezterm, https://github.com/wezterm/wezterm/releases, WezTerm-windows-...-.zip
+yazi, https://github.com/sxyazi/yazi/releases, yazi-x86_64-pc-windows-msvc.zip
 zoxide, https://github.com/ajeetdsouza/zoxide/releases, zoxide-0.9.8-x86_64-pc-windows-msvc.zip
