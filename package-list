@@ -10,6 +10,7 @@ ffmpeg, https://www.gyan.dev/ffmpeg/builds/ffmpeg-git-full.7z
 fzf, https://github.com/junegunn/fzf/releases, fzf-0.65.1-windows_amd64.zip
 jq, https://github.com/jqlang/jq/releases, jq-windows-amd64.exe
 less, https://github.com/jftuga/less-Windows/releases, less-x86.zip. x64 version is currently being blocked by ZScaler.
+lsd, https://github.com/lsd-rs/lsd/releases, lsd-v1.1.5-x86_64-pc-windows-msvc.zip
 rg, https://github.com/BurntSushi/ripgrep/releases, ripgrep-14.1.1-x86_64-pc-windows-gnu.zip
 uutils, https://github.com/uutils/coreutils/releases, coreutils-0.1.0-x86_64-pc-windows-msvc.zip
 wezterm, https://github.com/wezterm/wezterm/releases, WezTerm-windows-...-.zip
