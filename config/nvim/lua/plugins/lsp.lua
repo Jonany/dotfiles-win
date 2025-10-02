@@ -15,10 +15,10 @@
       },
     },
     config = function()
-      require("lspconfig").lua_ls.setup {}
+      vim.lsp.config("lua_ls", {})
 
       -- 2025-09-19: Seems to working well enough. I've been able to C# work in nvim the last few days.
-      require("lspconfig").csharp_ls.setup({
+      vim.lsp.config("csharp_ls", {
         cmd = { 'C:/Users/Jonathan.Rigsby/.dotnet/tools/csharp-ls.exe' }
       })
 
