@@ -1,8 +1,4 @@
-﻿#function Invoke-Starship-PreCommand {
-#    $Host.UI.RawUI.WindowTitle = "$(Split-Path -Path (Get-Location) -Leaf)"
-#}
-
-$env:XDG_CONFIG_HOME = "c:\development\etc\dotfiles-win\config"
+﻿$env:XDG_CONFIG_HOME = "c:\development\etc\dotfiles-win\config"
 $env:STARSHIP_CONFIG = "$env:XDG_CONFIG_HOME\starship.toml"
 $env:EDITOR = "nvim"
 $env:YAZI_CONFIG_HOME = "$env:XDG_CONFIG_HOME\yazi"
@@ -15,7 +11,7 @@ $env:POWERSHELL_UPDATECHECK_OPTOUT = 1
 $env:PATH += ";$env:USR_BIN"
 $env:PATH += ";$env:USR_BIN\lua-language-server\bin"
 $env:PATH += ";$env:USR_BIN\zig"
-
+$env:PATH += ";C:\Program Files\7-Zip" #7z cli tool
 
 Set-Alias -Name find -Value fd
 Set-Alias -Name ls -Value lsd
@@ -88,5 +84,3 @@ function y {
     }
     Remove-Item -Path $tmp
 }
-
-#Invoke-Expression (&starship init powershell)
