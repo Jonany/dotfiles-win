@@ -50,6 +50,8 @@ $env:PATH += ";C:\Program Files\7-Zip" #7z cli tool
 
 Set-Alias -Name find -Value fd
 Set-Alias -Name ls -Value lsd
+# The default curl alias points to Invoke-WebRequest
+Set-Alias -Name curl -Value curl.exe
 
 try {
     coreutils --help > $null
@@ -67,7 +69,6 @@ try {
     function coreutils-tail { coreutils tail @args }
     function coreutils-touch { coreutils touch @args }
     function coreutils-true { coreutils true @args }
-    function coreutils-whoami { coreutils whoami @args }
     Set-Alias -Name cat         -Value coreutils-cat
     Set-Alias -Name date        -Value coreutils-date
     Set-Alias -Name df          -Value coreutils-df
@@ -81,7 +82,6 @@ try {
     Set-Alias -Name tail        -Value coreutils-tail
     Set-Alias -Name touch       -Value coreutils-touch
     Set-Alias -Name true        -Value coreutils-true
-    Set-Alias -Name whoami      -Value coreutils-whoami
 } catch { }
 
 function dps { docker ps --format '{{json .}}' | ConvertFrom-Json | sort Names | ft Names, Status, Ports, Image }
@@ -119,3 +119,4 @@ function y {
     }
     Remove-Item -Path $tmp
 }
+
