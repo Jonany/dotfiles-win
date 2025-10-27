@@ -2,7 +2,7 @@
 dark = "tokyonight-night"
 light = "tokyonight-day"
 
-[manager]
+[mgr]
 # Hovered
 hovered         = { reversed = true }
 preview_hovered = { underline = true }
