@@ -1,4 +1,4 @@
--- Make sure to setup `mapleader` and `maplocalleader` before
+﻿-- Make sure to setup `mapleader` and `maplocalleader` before
 -- loading lazy.nvim so that mappings are correct.
 vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
@@ -10,5 +10,3 @@ vim.keymap.set("n", "<leader>x", ":.lua<CR>")
 -- Run the current selection
 vim.keymap.set("v", "<leader>x", ":lua<CR>")
 
--- Rename symbol under cursor
-vim.keymap.set("n", "<leader>r", vim.lsp.buf.rename)
