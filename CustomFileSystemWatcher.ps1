@@ -1,6 +1,10 @@
 ﻿# WORK IN PROGRESS
 # Kickstarted by https://powershell.one/tricks/filesystem/filesystemwatcher
 
+# I think I need to add some sort of debounce functionality
+# because I don't want the handler running on each change.
+# I think that would clog everything up.
+# I also need some way to checking if the handler is already running.
 function CustomFileSystemWatcher {
     param (
         [Parameter(Mandatory = $true)]
@@ -22,16 +26,31 @@ function CustomFileSystemWatcher {
             $watcher.Filters.Add($str) | Out-Null
         }
 
-        $handlers = . {
-          Register-ObjectEvent -InputObject $watcher -EventName Changed -Action $EventHandler
+        $lastAction = Get-Date
+        $action = {
+            Write-Host Last Action: $lastAction
+            $curr = Get-Date
+            $date_diff = New-TimeSpan -Start $lastAction -End $curr
+            $lastAction = Get-Date
+            if ($date_diff.TotalMilliseconds -lt 1000) {
+                Write-Host Skipping...
+            } else {
+                Write-Host Running custom handler
+                # & $EventHandler $event
+                # This seems to be hanging
+            }
         }
 
-        # monitoring starts now:
+        $handlers = . {
+          Register-ObjectEvent -InputObject $watcher -EventName Changed -Action $action
+        }
+
+        # Monitoring starts now
         $watcher.EnableRaisingEvents = $true
 
         Write-Host "Watching for changes to $Path"
 
-        # since the FileSystemWatcher is no longer blocking PowerShell
+        # Since the FileSystemWatcher is no longer blocking PowerShell
         # we need a way to pause PowerShell while being responsive to
         # incoming events. Use an endless loop to keep PowerShell busy:
         do
@@ -43,18 +62,17 @@ function CustomFileSystemWatcher {
     }
     finally
     {
-        # this gets executed when user presses CTRL+C:
+        # This gets executed when user presses CTRL+C:
 
-        # stop monitoring
+        # Stop monitoring
         $watcher.EnableRaisingEvents = $false
 
-        # remove the event handlers
+        # Remove the event handlers
         $handlers | ForEach-Object {
           Unregister-Event -SourceIdentifier $_.Name
         }
 
-        # event handlers are technically implemented as a special kind
-        # of background job, so remove the jobs now:
+        # Event handlers are technically implemented as a special kind of background job, so remove the jobs now:
         $handlers | Remove-Job
 
         $watcher.Dispose()
