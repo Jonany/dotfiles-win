@@ -36,7 +36,7 @@ function CustomFileSystemWatcher {
                 Write-Host Skipping...
             } else {
                 Write-Host Running custom handler
-                # & $EventHandler $event
+                & $EventHandler -FileWatcher $watcher -EventArgs $event
                 # This seems to be hanging
             }
         }
