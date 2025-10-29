@@ -1,11 +1,42 @@
-return {
+﻿return {
   {
     'nvim-treesitter/nvim-treesitter',
     build = ':TSUpdate',
     config = function()
-      require'nvim-treesitter.configs'.setup {
-	-- A list of parser names, or "all" (the listed parsers MUST always be installed)
-        ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "markdown", "markdown_inline" },
+      require 'nvim-treesitter.configs'.setup {
+        -- A list of parser names, or "all" (the listed parsers MUST always be installed)
+        ensure_installed = {
+          "c",
+          "c_sharp",
+          "csv",
+          "diff",
+          "dockerfile",
+          "editorconfig",
+          "gitignore",
+          "go",
+          "gomod",
+          "gosum",
+          "html",
+          "javascript",
+          "jq",
+          "jsdoc",
+          "json",
+          "jsonc",
+          "lua",
+          "markdown",
+          "markdown_inline",
+          "powershell",
+          "psv",
+          "query",
+          "sql",
+          "toml",
+          "tsv",
+          "typescript",
+          "vim",
+          "vimdoc",
+          "xml",
+          "yaml",
+        },
         auto_install = true,
         highlight = {
           enable = true,
