@@ -1,4 +1,41 @@
-﻿vim.lsp.config["lua-language-server"] = {
+﻿--vim.lsp.config["docker-language-server"] = {
+--  cmd = { 'docker-language-server', 'start', '--stdio', '--verbose' },
+--  filetypes = { 'dockerfile', 'yaml.docker-compose' },
+--  get_language_id = function(_, ftype)
+--    if ftype == 'yaml.docker-compose' or ftype:lower():find('ya?ml') then
+--      return 'dockercompose'
+--    else
+--      return ftype
+--    end
+--  end,
+--  root_markers = {
+--    'Dockerfile',
+--    'docker-compose.yaml',
+--    'docker-compose.yml',
+--    'compose.yaml',
+--    'compose.yml',
+--  },
+--  settings = {
+--    initializationOptions = {
+--      dockercomposeExperimental = true,
+--    },
+--    telemetry = "off",
+--  },
+--}
+vim.lsp.config["dockerls"] = {
+  cmd = { 'c:/users/jonathan.rigsby/.bun/bin/docker-langserver.exe', '--stdio' },
+  filetypes = { 'dockerfile' },
+  root_markers = { 'Dockerfile' },
+  settings = {
+    docker = {
+      formatter = {
+        ignoreMultilineInstructions = false,
+      },
+    },
+  },
+}
+
+vim.lsp.config["lua-language-server"] = {
   cmd = { 'lua-language-server' },
   filetypes = { 'lua' },
   root_markers = { { '.luarc.json', '.luarc.jsonc' }, '.git' },
@@ -63,8 +100,39 @@ vim.lsp.config["roslyn"] = {
   }
 }
 
+vim.lsp.config["yamlls"] = {
+  -- Can't seem to get this to work. It always fails to load the schema: Error: unable to get local issuer certificate
+  --cmd = { 'bun', 'run', 'c:/development/etc/microsoft/azure-pipelines-language-server/language-server/bin/azure-pipelines-language-server', '--stdio' },
+  cmd = { 'C:/Users/Jonathan.Rigsby/.bun/bin/yaml-language-server.exe', '--stdio' },
+  filetypes = { 'yaml' },
+  root_markers = { 'azure-devops' },
+  settings = {
+    redhat = { telemetry = { enabled = false } },
+    yaml = {
+      schemas = {
+        ["https://raw.githubusercontent.com/microsoft/azure-pipelines-vscode/master/service-schema.json"] = {
+          "**/azure-devops/*.yml",
+        },
+      },
+      schemaStore = {
+        enable = true,
+        url = "https://www.schemastore.org/api/json/catalog.json",
+      },
+      format = {
+        enable = false,
+      },
+      validate = true,
+      hover = true,
+      completion = true,
+    },
+  },
+}
+
+--vim.lsp.enable("docker-language-server")
+vim.lsp.enable("dockerls")
 vim.lsp.enable("lua-language-server")
 vim.lsp.enable("roslyn")
+--vim.lsp.enable("yamlls")
 
 vim.api.nvim_create_autocmd('LspAttach', {
   callback = function(args)
