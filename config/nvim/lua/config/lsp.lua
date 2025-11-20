@@ -51,7 +51,7 @@ vim.lsp.config["lua-language-server"] = {
 vim.lsp.config["roslyn"] = {
   cmd = {
     "dotnet",
-    "C:/development/usr-bin/Microsoft.CodeAnalysis.LanguageServer/content/LanguageServer/win-x64/Microsoft.CodeAnalysis.LanguageServer.dll",
+    "C:/util/apps/usr-bin/Microsoft.CodeAnalysis.LanguageServer/content/LanguageServer/win-x64/Microsoft.CodeAnalysis.LanguageServer.dll",
     "--logLevel",              -- this property is required by the server
     "Information",
     "--extensionLogDirectory", -- this property is required by the server
@@ -156,12 +156,3 @@ vim.api.nvim_create_autocmd('LspAttach', {
     end
   end,
 })
-
---These GLOBAL keymaps are created unconditionally when Nvim starts:
---- "grn" is mapped in Normal mode to |vim.lsp.buf.rename()|
---- "gra" is mapped in Normal and Visual mode to |vim.lsp.buf.code_action()|
---- "grr" is mapped in Normal mode to |vim.lsp.buf.references()|
---- "gri" is mapped in Normal mode to |vim.lsp.buf.implementation()|
---- "grt" is mapped in Normal mode to |vim.lsp.buf.type_definition()|
---- "gO" is mapped in Normal mode to |vim.lsp.buf.document_symbol()|
---- CTRL-S is mapped in Insert mode to |vim.lsp.buf.signature_help()|

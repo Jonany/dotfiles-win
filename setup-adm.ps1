@@ -8,9 +8,9 @@
 Write-Host `nSETUP:: Setting up WezTerm shortcut
 $shell = New-Object -ComObject WScript.Shell
 $shortcut = $shell.CreateShortcut("C:\ProgramData\Microsoft\Windows\Start Menu\Programs\WezTerm.lnk")
-$shortcut.TargetPath = "c:\development\usr-bin\wezterm\wezterm-gui.exe"
-$shortcut.Arguments = "--config-file `"c:\development\etc\dotfiles-win\config\wezterm.lua`""
-$shortcut.WorkingDirectory = "c:\development\usr-bin\wezterm"
+$shortcut.TargetPath = "c:\util\apps\usr-bin\wezterm-nightly\wezterm-gui.exe"
+$shortcut.Arguments = "--config-file `"c:\util\src\etc\dotfiles-win\config\wezterm.lua`""
+$shortcut.WorkingDirectory = "c:\util\apps\usr-bin\wezterm-nightly"
 $shortcut.Save()
 Write-Host SETUP:: Created shortcut with the following properties:
 Write-Host `t- TargetPath: "$($shortcut.TargetPath)"

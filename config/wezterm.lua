@@ -29,7 +29,7 @@ if wezterm.gui then
 end
 
 config.default_prog = { 'C:/Program Files/PowerShell/7/pwsh.exe', '-nologo' }
-config.default_cwd = "c:/development"
+config.default_cwd = "c:/util/src"
 config.font_size = 12.0
 
 local act = wezterm.action

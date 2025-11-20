@@ -35,16 +35,19 @@ function prompt {
     return "`n$shortPath$gitBranch`n-> ".ToLower()
 }
 
-$env:XDG_CONFIG_HOME = "c:\development\etc\dotfiles-win\config"
+$env:XDG_CONFIG_HOME = "c:\util\src\etc\dotfiles-win\config"
 $env:STARSHIP_CONFIG = "$env:XDG_CONFIG_HOME\starship.toml"
 $env:EDITOR = "nvim"
 $env:YAZI_CONFIG_HOME = "$env:XDG_CONFIG_HOME\yazi"
-$env:YAZI_FILE_ONE = "C:\Program Files\Git\usr\bin\file.exe"
-$env:USR_BIN = "c:\development\usr-bin"
+$env:YAZI_FILE_ONE = "C:\Program Files\Git\usr\bin\file.exe" # TODO: mv to adm_bin
+$env:USR_BIN = "c:\util\apps\usr-bin" # binaries installed without needing admin permissions
+$env:ADM_BIN = "c:\util\apps\bin" # binaries installed needing admin permissions
 $env:DOTNET_CLI_TELEMETRY_OPTOUT = 1
 $env:POWERSHELL_TELEMETRY_OPTOUT = 1
 $env:POWERSHELL_UPDATECHECK_OPTOUT = 1
 
+$env:PATH += ";$env:ADM_BIN"
+$env:PATH += ";$env:ADM_BIN\neovim\bin"
 $env:PATH += ";$env:USR_BIN"
 $env:PATH += ";$env:USR_BIN\lua-language-server\bin"
 $env:PATH += ";$env:USR_BIN\zig"
