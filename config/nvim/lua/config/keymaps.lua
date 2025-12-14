@@ -10,3 +10,8 @@ vim.keymap.set("n", "<leader>x", ":.lua<CR>")
 -- Run the current selection
 vim.keymap.set("v", "<leader>x", ":lua<CR>")
 
+-- delete means delete not cut
+vim.keymap.set({ 'n', 'v' }, 'd', '"_d', { noremap = true, })
+vim.keymap.set('n', 'dd', '"_dd', { noremap = true, })
+vim.keymap.set('x', 'p', '"_dP', { noremap = true })
+--vim.keymap.set('v', 'iwp', 'iw"_dP', { noremap = true, })
