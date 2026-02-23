@@ -51,7 +51,7 @@ $env:PATH += ";$env:ADM_BIN\neovim\bin"
 $env:PATH += ";$env:USR_BIN"
 $env:PATH += ";$env:USR_BIN\lua-language-server\bin"
 $env:PATH += ";$env:USR_BIN\zig"
-$env:PATH += ";C:\Program Files\7-Zip" #7z cli tool
+$env:PATH += ";C:\Program Files\7-Zip" #7z cli tool, TODO: mv to adm_bin
 
 Set-Alias -Name find -Value fd
 Set-Alias -Name ls -Value lsd
