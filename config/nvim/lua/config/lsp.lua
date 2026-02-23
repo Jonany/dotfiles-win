@@ -59,9 +59,9 @@ vim.lsp.config["roslyn"] = {
     "--stdio",
   },
   filetypes = { 'cs', 'csproj' },
-  root_markers = { { '.csproj', '.sln' }, '.git' },
+  root_markers = { { '.csproj', '.sln', '.slnx' }, '.git' },
   on_attach = function()
-    print("This will run when the server attaches!")
+    print("Roslyn is running")
   end,
   settings = {
     ["csharp|inlay_hints"] = {
