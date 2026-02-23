@@ -115,6 +115,9 @@ function pwd-custom { (Get-Location).Path }
 Set-Alias -Name pwd -Value pwd-custom
 function pwd-clip { pwd | Set-Clipboard }
 
+function sqlcmd-custom { &'C:\Program Files\SqlCmd\sqlcmd.exe' @args }
+Set-Alias -Name sqlcmd -Value sqlcmd-custom
+
 function y {
     $tmp = [System.IO.Path]::GetTempFileName()
     yazi $args --cwd-file="$tmp"

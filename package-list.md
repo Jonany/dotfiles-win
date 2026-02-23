@@ -4,6 +4,7 @@
 [fzf](https://github.com/junegunn/fzf/releases), 0.68.0, fzf-...-windows_amd64.zip
 [git](https://git-scm.com/downloads/win), 2.53.0, "Git for Windows/x64 Setup". I think this gets auto-updated.
 [golang](https://go.dev/dl/), 1.26.0, windows-amd64.msi
+[go-sqlcmd](https://github.com/microsoft/go-sqlcmd/releases), 1.9.0, sqlcmd-amd64.msi
 [image-magick](https://github.com/ImageMagick/ImageMagick/releases), 7.1.2-15, ImageMagick.Q16-HDRI.msixbundle
 [jq](https://github.com/jqlang/jq/releases), 1.8.1, jq-windows-amd64.exe
 [lazygit](https://github.com/jesseduffield/lazygit), 0.59.0, `go install github.com/jesseduffield/lazygit@latest`
