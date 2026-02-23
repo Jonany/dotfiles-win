@@ -13,6 +13,8 @@ vim.keymap.set("v", "<leader>x", ":lua<CR>")
 vim.keymap.set("n", "<leader>w", ":w<CR>")
 vim.keymap.set("n", "<leader>q", ":q<CR>")
 vim.keymap.set("n", "<leader>wq", ":wq<CR>")
+vim.keymap.set("n", "<leader>e", ":Ex<CR>")
+
 -- delete means delete not cut
 vim.keymap.set({ 'n', 'v' }, 'd', '"_d', { noremap = true, })
 vim.keymap.set('n', 'dd', '"_dd', { noremap = true, })
