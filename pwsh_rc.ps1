@@ -36,6 +36,7 @@ function prompt {
 }
 
 $env:XDG_CONFIG_HOME = "c:\util\src\etc\dotfiles-win\config"
+[System.Environment]::SetEnvironmentVariable("XDG_CONFIG_HOME", $env:XDG_CONFIG_HOME, "User") # One or more batch scripts use this
 $env:STARSHIP_CONFIG = "$env:XDG_CONFIG_HOME\starship.toml"
 $env:EDITOR = "nvim"
 $env:YAZI_CONFIG_HOME = "$env:XDG_CONFIG_HOME\yazi"
