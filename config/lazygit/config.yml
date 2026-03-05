@@ -11,3 +11,10 @@ os:
 
 gui:
   sidePanelWidth: 0.3333
+customCommands:
+  - key: G
+    # lazygit uses cmd for running commands
+    command: '%XDG_CONFIG_HOME%\lazygit\prune-local-upstream-gone.bat'
+    context: "localBranches"
+    description: "Prune local branches no longer on its remote; (G)one."
+    loadingText: "Pruning gone..."
