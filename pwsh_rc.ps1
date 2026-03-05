@@ -54,6 +54,7 @@ $env:PATH += ";$env:USR_BIN\lua-language-server\bin"
 $env:PATH += ";$env:USR_BIN\zig"
 $env:PATH += ";C:\Program Files\7-Zip" #7z cli tool, TODO: mv to adm_bin
 
+Set-Alias -Name e -Value nvim
 Set-Alias -Name find -Value fd
 Set-Alias -Name ls -Value lsd
 # The default curl alias points to Invoke-WebRequest
