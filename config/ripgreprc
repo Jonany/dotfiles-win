@@ -1,0 +1,37 @@
+# Don't let ripgrep vomit really long lines to my terminal, and show a preview.
+#  -M NUM, --max-columns=NUM
+#      When given, ripgrep will omit lines longer than this limit in bytes.
+#      Instead of printing long lines, only the number of matches in that line
+#      is printed.
+#
+#      When this flag is omitted or is set to 0, then it has no effect.
+--max-columns=120
+
+# --max-columns-preview
+#     Prints a preview for lines exceeding the configured max column limit.
+#
+#     When the -M/--max-columns flag is used, ripgrep will by default
+#     completely replace any line that is too long with a message indicating
+#     that a matching line was removed. When this flag is combined with
+#     -M/--max-columns, a preview of the line (corresponding to the limit
+#     size) is shown instead, where the part of the line exceeding the limit
+#     is not shown.
+#
+#     If the -M/--max-columns flag is not set, then this has no effect.
+#
+#     This flag can be disabled with --no-max-columns-preview.
+--max-columns-preview
+
+# Ignore test file by default.
+--glob=!**/*Test*
+--glob=!**/wwwroot
+--glob=!**/[Gg]enerated
+--glob=!**/web.config
+--glob=!*.resx
+--glob=!*.js
+--glob=!*.js.map
+--glob=!*.json
+--glob=!*.ts
+
+--ignore-case
+#--vimgrep

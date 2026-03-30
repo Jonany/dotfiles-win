@@ -39,6 +39,7 @@ $env:XDG_CONFIG_HOME = "c:\util\src\etc\dotfiles-win\config"
 [System.Environment]::SetEnvironmentVariable("XDG_CONFIG_HOME", $env:XDG_CONFIG_HOME, "User") # One or more batch scripts use this
 $env:STARSHIP_CONFIG = "$env:XDG_CONFIG_HOME\starship.toml"
 $env:EDITOR = "nvim"
+$env:RIPGREP_CONFIG_PATH="$env:XDG_CONFIG_HOME\ripgreprc"
 $env:YAZI_CONFIG_HOME = "$env:XDG_CONFIG_HOME\yazi"
 $env:YAZI_FILE_ONE = "C:\Program Files\Git\usr\bin\file.exe" # TODO: mv to adm_bin
 $env:USR_BIN = "c:\util\apps\usr-bin" # binaries installed without needing admin permissions
