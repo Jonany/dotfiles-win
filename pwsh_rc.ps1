@@ -47,6 +47,8 @@ $env:ADM_BIN = "c:\util\apps\bin" # binaries installed needing admin permissions
 $env:DOTNET_CLI_TELEMETRY_OPTOUT = 1
 $env:POWERSHELL_TELEMETRY_OPTOUT = 1
 $env:POWERSHELL_UPDATECHECK_OPTOUT = 1
+$env:OPENCODE_DISABLE_CLAUDE_CODE=1
+$env:OPENCODE_CONFIG="$HOME\.config\opencode\opencode.json" # it was picking up on my XDG config and I don't want that crap in here
 
 $env:PATH += ";$env:ADM_BIN"
 $env:PATH += ";$env:ADM_BIN\neovim\bin"
