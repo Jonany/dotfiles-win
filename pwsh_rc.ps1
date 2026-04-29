@@ -95,6 +95,9 @@ try {
     Set-Alias -Name true        -Value coreutils-true
 } catch { }
 
+function dprint-custom { dprint --config "$env:XDG_CONFIG_HOME\dprint.jsonc" @args }
+set-alias -name dprint -value dprint-custom
+
 function dps { docker ps --format '{{json .}}' | ConvertFrom-Json | sort Names | ft Names, Status, Ports, Image }
 
 function dusset { dotnet user-secrets set @args && dusls }
