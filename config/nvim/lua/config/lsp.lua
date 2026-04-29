@@ -58,7 +58,7 @@ vim.lsp.config["roslyn"] = {
     vim.fs.joinpath(vim.uv.os_tmpdir(), "roslyn_ls/logs"),
     "--stdio",
   },
-  filetypes = { 'cs', 'csproj' },
+  filetypes = { 'cs', 'csproj', 'sln', 'slnx' },
   root_markers = { { '.csproj', '.sln', '.slnx' }, '.git' },
   on_attach = function()
     print("Roslyn is running")
