@@ -1,11 +1,11 @@
-﻿[7zip](https://www.7-zip.org/download.html), 26.00, Windows x64 MSI
+[7zip](https://www.7-zip.org/download.html), 26.00, Windows x64 MSI
 [fd](https://github.com/sharkdp/fd/releases), 10.3.0, fd-...-x86_64-pc-windows-msvc.zip
 [ffmpeg](https://www.gyan.dev/ffmpeg/builds/ffmpeg-git-full.7z), 2026-02-23-git-7b15039cdb, download and extract and copy to usr-bin.
 [fzf](https://github.com/junegunn/fzf/releases), 0.68.0, fzf-...-windows_amd64.zip
 [git](https://git-scm.com/downloads/win), 2.53.0, "Git for Windows/x64 Setup". I think this gets auto-updated.
 [golang](https://go.dev/dl/), 1.26.0, windows-amd64.msi
-[go-sqlcmd](https://github.com/microsoft/go-sqlcmd/releases), 1.9.0, sqlcmd-amd64.msi
-[image-magick](https://github.com/ImageMagick/ImageMagick/releases), 7.1.2-15, ImageMagick.Q16-HDRI.msixbundle
+[go-sqlcmd](https://github.com/microsoft/go-sqlcmd/releases), 1.10.0, sqlcmd-amd64.msi
+[image-magick](https://github.com/ImageMagick/ImageMagick/releases), 7.1.2-21, ImageMagick.Q16-HDRI.msixbundle
 [jq](https://github.com/jqlang/jq/releases), 1.8.1, jq-windows-amd64.exe
 [lazygit](https://github.com/jesseduffield/lazygit), 0.59.0, `go install github.com/jesseduffield/lazygit@latest`
 [less](https://github.com/jftuga/less-Windows/releases), 692, less-x64.zip
@@ -18,7 +18,7 @@
 [rosyln](https://dev.azure.com/azure-public/vside/_artifacts/feed/vs-impl/NuGet/Microsoft.CodeAnalysis.LanguageServer.win-x64/overview), 5.4.0-2.26080.13, Download and unzip and copy to usr-bin.
 [ssms](https://learn.microsoft.com/en-us/ssms/install/install), vs_SSMS.exe. Basically a bootstrapper to install via Visual Studio Installer.
 [sublime-text](https://www.sublimetext.com/download_thanks?target=win-x64)
-[uutils](https://github.com/uutils/coreutils/releases), 0.6.0, coreutils-...-x86_64-pc-windows-msvc.zip
+[uutils](https://github.com/uutils/coreutils/releases), 0.8.0, coreutils-...-x86_64-pc-windows-msvc.zip
 [visual-studio](https://visualstudio.microsoft.com/thank-you-downloading-visual-studio/?sku=Professional&channel=Release&version=VS2022)
 [wezterm](https://github.com/wezterm/wezterm/releases), 20240203-110809-5046fc22, WezTerm-windows-...-.zip
 [wezterm-nightly](https://github.com/wezterm/wezterm/releases/download/nightly/WezTerm-windows-nightly.zip) 20260117-154428-05343b38.

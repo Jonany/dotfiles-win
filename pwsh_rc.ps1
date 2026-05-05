@@ -65,34 +65,34 @@ Set-Alias -Name ls -Value lsd
 Set-Alias -Name curl -Value curl.exe
 
 try {
-    coreutils --help > $null
+    uutils-cat --help > $null
 
-    function coreutils-cat { coreutils cat @args }
-    function coreutils-date { coreutils date @args }
-    function coreutils-df { coreutils df @args }
-    function coreutils-du { coreutils du @args }
-    function coreutils-head { coreutils head @args }
-    function coreutils-mkdir { coreutils mkdir @args }
-    function coreutils-mv { coreutils mv @args }
-    function coreutils-pwd { coreutils pwd @args }
-    function coreutils-rm { coreutils rm @args }
-    function coreutils-split { coreutils split @args }
-    function coreutils-tail { coreutils tail @args }
-    function coreutils-touch { coreutils touch @args }
-    function coreutils-true { coreutils true @args }
-    Set-Alias -Name cat         -Value coreutils-cat
-    Set-Alias -Name date        -Value coreutils-date
-    Set-Alias -Name df          -Value coreutils-df
-    Set-Alias -Name du          -Value coreutils-du
-    Set-Alias -Name head        -Value coreutils-head
-    Set-Alias -Name mkdir       -Value coreutils-mkdir
-    Set-Alias -Name mv          -Value coreutils-mv
-    Set-Alias -Name pwd         -Value coreutils-pwd
-    Set-Alias -Name rm          -Value coreutils-rm
-    Set-Alias -Name split       -Value coreutils-split
-    Set-Alias -Name tail        -Value coreutils-tail
-    Set-Alias -Name touch       -Value coreutils-touch
-    Set-Alias -Name true        -Value coreutils-true
+    function coreutils-cat   { uutils-cat @args }
+    function coreutils-date  { uutils-date @args }
+    function coreutils-df    { uutils-df @args }
+    function coreutils-du    { uutils-du @args }
+    function coreutils-head  { uutils-head @args }
+    function coreutils-mkdir { uutils-mkdir @args }
+    function coreutils-mv    { uutils-mv @args }
+    function coreutils-pwd   { uutils-pwd @args }
+    function coreutils-rm    { uutils-rm @args }
+    function coreutils-split { uutils-split @args }
+    function coreutils-tail  { uutils-tail @args }
+    function coreutils-touch { uutils-touch @args }
+    function coreutils-true  { uutils-true @args }
+    Set-Alias -Name cat   -Value coreutils-cat
+    Set-Alias -Name date  -Value coreutils-date
+    Set-Alias -Name df    -Value coreutils-df
+    Set-Alias -Name du    -Value coreutils-du
+    Set-Alias -Name head  -Value coreutils-head
+    Set-Alias -Name mkdir -Value coreutils-mkdir
+    Set-Alias -Name mv    -Value coreutils-mv
+    Set-Alias -Name pwd   -Value coreutils-pwd
+    Set-Alias -Name rm    -Value coreutils-rm
+    Set-Alias -Name split -Value coreutils-split
+    Set-Alias -Name tail  -Value coreutils-tail
+    Set-Alias -Name touch -Value coreutils-touch
+    Set-Alias -Name true  -Value coreutils-true
 } catch { }
 
 function dprint-custom { dprint --config "$env:XDG_CONFIG_HOME\dprint.jsonc" @args }
