@@ -1,4 +1,4 @@
-﻿local pickers = require('telescope.pickers')
+local pickers = require('telescope.pickers')
 local finders = require('telescope.finders')
 local make_entry = require('telescope.make_entry')
 local conf = require('telescope.config').values
@@ -10,7 +10,7 @@ local live_multigrep = function(opts)
 
   local finder = finders.new_async_job {
     command_generator = function(prompt)
-      if not prompt or prompt == "" then
+      if not prompt or prompt == '' then
         return nil
       end
       local pieces = vim.split(prompt, '  ')
@@ -31,7 +31,7 @@ local live_multigrep = function(opts)
       return vim.tbl_flatten {
         opts.args,
         promptArgs,
-        { '--color=never', '--no-heading', '--with-filename', '--line-number', '--column', '--smart-case', '--glob-case-insensitive' },
+        { '--color=never', '--no-heading', '--with-filename', '--line-number', '--column', '--smart-case', '--glob-case-insensitive', '--follow' },
       }
     end,
     entry_maker = make_entry.gen_from_vimgrep(opts),
@@ -52,5 +52,5 @@ return {
     vim.keymap.set('n', '<leader>fg', live_multigrep)
     -- Doesn't return any results
     --vim.keymap.set('n', '<leader>fs', function() live_multigrep({ args = { '--sorted=path', }, }) end)
-  end
+  end,
 }

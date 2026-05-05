@@ -6,7 +6,7 @@ vim.opt.scrolloff = 999
 -- highlight the row the cursor is on
 vim.opt.cursorline = true
 
-vim.opt.clipboard = "unnamedplus"
+vim.opt.clipboard = 'unnamedplus'
 
 vim.opt.termguicolors = true
-vim.opt.background = "dark"
+vim.opt.background = 'dark'

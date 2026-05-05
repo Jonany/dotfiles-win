@@ -6,30 +6,31 @@ return {
     {
       'nvim-telescope/telescope-fzf-native.nvim',
       build =
-      'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release -DCMAKE_C_COMPILER="zig cc" && cmake --build build --config Release'
+      'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release -DCMAKE_C_COMPILER="zig cc" && cmake --build build --config Release',
     },
   },
   config = function()
     -- Customizations
     local actions = require('telescope.actions')
-    local action_layout = require("telescope.actions.layout")
-    require("telescope").setup {
+    local action_layout = require('telescope.actions.layout')
+    require('telescope').setup {
       defaults = {
         --path_display = { shorten = { len = 1, exclude = { -1, -2 } } },
-        path_display = { "filename_first" },
-        layout_strategy = "vertical",
+        path_display = { 'filename_first' },
+        layout_strategy = 'vertical',
         layout_config = {
           vertical = {
-            preview_height = function(_, _, max_lines) return math.max(math.floor(max_lines * 0.66), 15) end,
+            preview_height = function(_, _, max_lines) return math.max(
+              math.floor(max_lines * 0.66), 15) end,
           },
         },
         mappings = {
           n = {
             -- M == meta/alt
-            ["<M-p>"] = action_layout.toggle_preview,
+            ['<M-p>'] = action_layout.toggle_preview,
           },
           i = {
-            ["<M-p>"] = action_layout.toggle_preview,
+            ['<M-p>'] = action_layout.toggle_preview,
           },
         },
       },
@@ -37,7 +38,7 @@ return {
         buffers = {
           mappings = {
             i = {
-              ["<c-d>"] = actions.delete_buffer + actions.move_to_top,
+              ['<c-d>'] = actions.delete_buffer + actions.move_to_top,
             },
           },
         },
@@ -50,7 +51,7 @@ return {
     --vim.keymap.set('n', '<leader>fg', builtin.live_grep, { desc = 'Telescope live grep' })
     vim.keymap.set('n', '<leader>fb',
       function()
-        builtin.buffers({ show_all_buffers = false, path_display = { "filename_first" }, })
+        builtin.buffers({ show_all_buffers = false, path_display = { 'filename_first' } })
       end,
       { desc = 'Telescope buffers' }
     )
