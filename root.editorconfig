@@ -1,3 +1,4 @@
+# meant to be copied somewhere root-ish
 root = true
 
 [*]
@@ -9,5 +10,10 @@ trim_trailing_whitespace = true
 insert_final_newline = true
 
 [*.{lua,yml,yaml}]
-indent_style = space
 indent_size = 2
+
+[*.lua]
+quote_style = single
+end_of_line = auto
+table_separator_style = comma
+trailing_table_separator = smart
