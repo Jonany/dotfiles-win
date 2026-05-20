@@ -95,7 +95,8 @@ try {
     Set-Alias -Name true  -Value coreutils-true
 } catch { }
 
-function dprint-custom { dprint --config "$env:XDG_CONFIG_HOME\dprint.jsonc" @args }
+# `.exe` is important to target the executable and not the alias. creates an infinite loop otherwise.
+function dprint-custom { dprint.exe --config "$env:XDG_CONFIG_HOME\dprint.jsonc" @args }
 set-alias -name dprint -value dprint-custom
 
 function dps { docker ps --format '{{json .}}' | ConvertFrom-Json | sort Names | ft Names, Status, Ports, Image }
