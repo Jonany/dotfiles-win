@@ -1,3 +1,34 @@
+vim.lsp.config['angularls'] = {
+  cmd = {
+    'c:/users/jonathan.rigsby/.bun/bin/ngserver.exe',
+    '--stdio',
+    '--tsProbeLocations', 'C:/Users/Jonathan.Rigsby/.bun/bin',
+    '--ngProbeLocations', 'C:/Users/Jonathan.Rigsby/.bun/bin',
+    '--angularCoreVersion', '21.2.13',
+  },
+  filetypes = { 'typescript', 'html', 'typescriptreact', 'htmlangular' },
+  root_markers = { 'angular.json', },
+}
+
+vim.lsp.config['azure_pipelines_ls'] = {
+  -- https://github.com/microsoft/azure-pipelines-language-server
+  -- `bun install -g azure-pipelines-language-server`
+  cmd = { 'C:/Users/Jonathan.Rigsby/.bun/bin/azure-pipelines-language-server.exe', '--stdio' },
+  cmd_env = { NODE_TLS_REJECT_UNAUTHORIZED = 0 },
+  filetypes = { 'yaml' },
+  root_markers = { 'azure-devops' },
+  settings = {
+    yaml = {
+      schemas = {
+        ['file:///C:/util/apps/usr-bin/azure-pipelines/service-schema.json'] = {
+          '**/azure-devops/*.yml',
+          '**/azure-devops/*.yaml',
+        },
+      },
+    },
+  },
+}
+
 vim.lsp.config['buf_ls'] = {
   -- https://github.com/bufbuild/buf
   cmd = { 'buf', 'lsp', 'serve' },
@@ -112,7 +143,7 @@ vim.lsp.config['roslyn'] = {
 
 vim.lsp.config['sqls'] = {
   cmd = { 'sqls', '-config', 'c:/util/src/sqls-config.yml' },
-  filetypes = { 'sql', 'mysql' },
+  filetypes = { 'sql', },
   root_markers = { { '.sqlproj', '.sln' }, '.git' },
   on_attach = function()
     print('sqls is running')
@@ -132,13 +163,30 @@ vim.lsp.config['tsgo'] = {
     'typescriptreact',
     'typescript.tsx',
   },
+  settings = {
+    typescript = {
+      inlayHints = {
+        parameterNames = {
+          enabled = 'all',
+          suppressWhenArgumentMatchesName = false,
+        },
+        parameterTypes = { enabled = true },
+        variableTypes = {
+          enabled = true,
+          suppressWhenTypeMatchesName = false,
+        },
+        propertyDeclarationTypes = { enabled = true },
+        functionLikeReturnTypes = { enabled = true },
+        enumMemberValues = { enabled = true },
+      },
+    },
+  },
   root_dir = function(bufnr, on_dir)
     -- The project root is where the LSP can be started from
     -- As stated in the documentation above, this LSP supports monorepos and simple projects.
     -- We select then from the project root, which is identified by the presence of a package
     -- manager lock file.
-    local root_markers = { 'package-lock.json', 'yarn.lock', 'pnpm-lock.yaml', 'bun.lockb',
-      'bun.lock', '.git' }
+    local root_markers = { 'tsconfig.json', 'package-lock.json', 'bun.lockb', 'bun.lock', '.git' }
     -- We fallback to the current working directory if no project root is found
     local project_root = vim.fs.root(bufnr, root_markers) or vim.fn.getcwd()
 
@@ -176,25 +224,8 @@ vim.lsp.config['yamlls'] = {
     },
   },
 }
-vim.lsp.config['azure_pipelines_ls'] = {
-  -- https://github.com/microsoft/azure-pipelines-language-server
-  -- `bun install -g azure-pipelines-language-server`
-  cmd = { 'C:/Users/Jonathan.Rigsby/.bun/bin/azure-pipelines-language-server.exe', '--stdio' },
-  cmd_env = { NODE_TLS_REJECT_UNAUTHORIZED = 0 },
-  filetypes = { 'yaml' },
-  root_markers = { 'azure-devops' },
-  settings = {
-    yaml = {
-      schemas = {
-        ['file:///C:/util/apps/usr-bin/azure-pipelines/service-schema.json'] = {
-          '**/azure-devops/*.yml',
-          '**/azure-devops/*.yaml',
-        },
-      },
-    },
-  },
-}
 
+vim.lsp.enable('angularls')
 vim.lsp.enable('azure_pipelines_ls')
 --vim.lsp.enable('buf_ls')
 --vim.lsp.enable('docker-language-server')
@@ -202,7 +233,7 @@ vim.lsp.enable('dockerls')
 vim.lsp.enable('lua-language-server')
 vim.lsp.enable('roslyn')
 --vim.lsp.enable('sqls')
---vim.lsp.enable('tsgo')
+vim.lsp.enable('tsgo')
 --vim.lsp.enable('yamlls')
 
 vim.api.nvim_create_autocmd('LspAttach', {
