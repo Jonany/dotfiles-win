@@ -50,6 +50,7 @@ vim.opt.termguicolors = true
 vim.opt.background = 'dark'
 
 vim.g.nofsync = true
+vim.cmd [[set autocomplete]]
 
 -- *******
 -- * LSP *
@@ -59,7 +60,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
     local client = assert(vim.lsp.get_client_by_id(args.data.client_id))
 
     -- autocomplete
-    vim.cmd [[set completeopt+=menuone,noselect,popup]]
+    vim.cmd [[set completeopt+=fuzzy,menuone,noselect,popup]]
     if client:supports_method('textDocument/completion') then
       vim.lsp.completion.enable(true, client.id, args.buf, { autotrigger = false })
     end
@@ -326,7 +327,6 @@ require('lazy').setup({
         local action_layout = require('telescope.actions.layout')
         require('telescope').setup {
           defaults = {
-            --path_display = { shorten = { len = 1, exclude = { -1, -2 } } },
             path_display = { 'filename_first' },
             layout_strategy = 'vertical',
             layout_config = {
@@ -338,8 +338,8 @@ require('lazy').setup({
               },
             },
             mappings = {
+              -- M == meta/alt
               n = {
-                -- M == meta/alt
                 ['<M-p>'] = action_layout.toggle_preview,
               },
               i = {
@@ -401,11 +401,11 @@ require('lazy').setup({
                 end
               end
 
-              return vim.tbl_flatten {
+              return vim.iter({
                 opts.args,
                 promptArgs,
                 { '--color=never', '--no-heading', '--with-filename', '--line-number', '--column', '--smart-case', '--glob-case-insensitive', '--follow' },
-              }
+              }):flatten():totable()
             end,
             entry_maker = make_entry.gen_from_vimgrep(opts),
             cwd = opts.cwd,
