@@ -97,15 +97,22 @@ vim.api.nvim_create_autocmd('LspAttach', {
 })
 
 vim.lsp.config['angularls'] = {
-  cmd = {
-    'c:/users/jonathan.rigsby/.bun/bin/ngserver.exe',
-    '--stdio',
-    '--tsProbeLocations', 'C:/Users/Jonathan.Rigsby/.bun/bin',
-    '--ngProbeLocations', 'C:/Users/Jonathan.Rigsby/.bun/bin',
-    '--angularCoreVersion', '21.2.13',
-  },
-  filetypes = { 'typescript', 'html', 'typescriptreact', 'htmlangular' },
+  -- Manually building cmd so that we can include project node_modules for tsProbeLocations
+  cmd = function(dispatchers, config)
+    local root_dir = (config and config.root_dir) or vim.fn.getcwd()
+
+    local cmd = {
+      'C:/Users/Jonathan.Rigsby/AppData/Roaming/npm/ngserver',
+      '--stdio',
+      '--tsProbeLocations', vim.fs.joinpath(root_dir, 'node_modules/typescript'),
+      '--ngProbeLocations',
+      'C:/Users/Jonathan.Rigsby/AppData/Roaming/npm/node_modules/@angular/language-server/node_modules',
+      '--angularCoreVersion', '21.2.14',
+    }
+    return vim.lsp.rpc.start(cmd, dispatchers)
+  end,
   root_markers = { 'angular.json', },
+  filetypes = { 'typescript', 'html', 'htmlangular' },
 }
 
 vim.lsp.config['azure_pipelines_ls'] = {
