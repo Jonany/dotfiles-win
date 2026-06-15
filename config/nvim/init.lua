@@ -259,227 +259,105 @@ vim.lsp.config['tsgo'] = {
 
 vim.lsp.enable({ 'angularls', 'azure_pipelines_ls', 'dockerls', 'lua-language-server', 'roslyn', 'tsgo', })
 
--- ********
--- * LAZY *
--- ********
-local lazypath = vim.fn.stdpath('data') .. '/lazy/lazy.nvim'
-if not (vim.uv or vim.loop).fs_stat(lazypath) then
-  local lazyrepo = 'https://github.com/folke/lazy.nvim.git'
-  local out = vim.fn.system({ 'git', 'clone', '--filter=blob:none', '--branch=stable', lazyrepo, lazypath })
-  if vim.v.shell_error ~= 0 then
-    vim.api.nvim_echo({
-      { 'Failed to clone lazy.nvim:\n', 'ErrorMsg' },
-      { out,                            'WarningMsg' },
-      { '\nPress any key to exit...' },
-    }, true, {})
-    vim.fn.getchar()
-    os.exit(1)
-  end
-end
-vim.opt.rtp:prepend(lazypath)
+-- ***********
+-- * PLUGINS *
+-- ***********
+vim.pack.add({
+  { src = 'https://github.com/f-person/auto-dark-mode.nvim', },
+  { src = 'https://github.com/nvim-mini/mini.statusline', },
+  { src = 'https://github.com/nvim-mini/mini.pick', },
+  { src = 'https://github.com/seblyng/roslyn.nvim', },
+  { src = 'https://github.com/folke/tokyonight.nvim', },
+  { src = 'https://github.com/nvim-treesitter/nvim-treesitter', version = 'main', },
+})
+require('auto-dark-mode').setup({
+  update_interval = 1000,
+  set_dark_mode = function()
+    vim.api.nvim_set_option_value('background', 'dark', {})
+    vim.cmd('colorscheme tokyonight-night')
+  end,
+  set_light_mode = function()
+    vim.api.nvim_set_option_value('background', 'light', {})
+    vim.cmd('colorscheme tokyonight-day')
+  end,
+})
+require('roslyn').setup({
+  filewatching = 'roslyn',
+  choose_target = nil,
+  ignore_target = nil,
+  broad_search = false,
+  lock_target = false,
+  silent = false,
+})
+require('mini.statusline').setup()
 
--- Setup lazy.nvim
-require('lazy').setup({
-  spec = {
-    {
-      'f-person/auto-dark-mode.nvim',
-      opts = {
-        update_interval = 1000,
-        set_dark_mode = function()
-          vim.api.nvim_set_option_value('background', 'dark', {})
-          vim.cmd('colorscheme tokyonight-night')
-        end,
-        set_light_mode = function()
-          vim.api.nvim_set_option_value('background', 'light', {})
-          vim.cmd('colorscheme tokyonight-day')
-        end,
-      },
-    },
-    {
-      'echasnovski/mini.nvim',
-      config = function()
-        local statusline = require 'mini.statusline'
-        statusline.setup { use_icons = true }
-      end,
-    },
-    {
-      'seblyng/roslyn.nvim',
-      ---@module 'roslyn.config'
-      ---@type RoslynNvimConfig
-      opts = {
-        filewatching = 'roslyn',
-        choose_target = nil,
-        ignore_target = nil,
-        broad_search = false,
-        lock_target = false,
-        silent = false,
-      },
-    },
-    {
-      'nvim-telescope/telescope.nvim',
-      tag = 'v0.2.1',
-      dependencies = {
-        'nvim-lua/plenary.nvim',
-        {
-          'nvim-telescope/telescope-fzf-native.nvim',
-          build =
-          'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release -DCMAKE_C_COMPILER="zig cc" && cmake --build build --config Release',
-        },
-      },
-      config = function()
-        -- Customizations
-        local actions = require('telescope.actions')
-        local action_layout = require('telescope.actions.layout')
-        require('telescope').setup {
-          defaults = {
-            path_display = { 'filename_first' },
-            layout_strategy = 'vertical',
-            layout_config = {
-              vertical = {
-                preview_height = function(_, _, max_lines)
-                  return math.max(
-                    math.floor(max_lines * 0.66), 15)
-                end,
-              },
-            },
-            mappings = {
-              -- M == meta/alt
-              n = {
-                ['<M-p>'] = action_layout.toggle_preview,
-              },
-              i = {
-                ['<M-p>'] = action_layout.toggle_preview,
-              },
-            },
-          },
-          pickers = {
-            buffers = {
-              mappings = {
-                i = {
-                  ['<c-d>'] = actions.delete_buffer + actions.move_to_top,
-                },
-              },
-            },
-          },
-        }
-
-        -- Keymaps
-        local builtin = require('telescope.builtin')
-        vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = 'Telescope find files' })
-        vim.keymap.set('n', '<leader>fb',
-          function()
-            builtin.buffers({ show_all_buffers = false, path_display = { 'filename_first' } })
-          end,
-          { desc = 'Telescope buffers' }
-        )
-        vim.keymap.set('n', '<leader>fh', builtin.help_tags, { desc = 'Telescope help tags' })
-        local live_multigrep = function(_) end --forward declaration
-        vim.keymap.set('n', '<leader>fg', live_multigrep)
-
-        live_multigrep = function(opts)
-          local pickers = require('telescope.pickers')
-          local finders = require('telescope.finders')
-          local make_entry = require('telescope.make_entry')
-          local conf = require('telescope.config').values
-
-          opts = opts or {}
-          opts.args = opts.args or {}
-          opts.cwd = opts.cwd or vim.uv.cwd()
-
-          local finder = finders.new_async_job {
-            command_generator = function(prompt)
-              if not prompt or prompt == '' then
-                return nil
-              end
-              local pieces = vim.split(prompt, '  ')
-              local promptArgs = { 'rg' }
-              if pieces[1] then
-                table.insert(promptArgs, '-e')
-                table.insert(promptArgs, pieces[1])
-              end
-
-              if #pieces > 1 then
-                _ = table.remove(pieces, 1)
-                for _, arg_piece in ipairs(pieces) do
-                  table.insert(promptArgs, '-g')
-                  table.insert(promptArgs, arg_piece)
-                end
-              end
-
-              return vim.iter({
-                opts.args,
-                promptArgs,
-                { '--color=never', '--no-heading', '--with-filename', '--line-number', '--column', '--smart-case', '--glob-case-insensitive', '--follow' },
-              }):flatten():totable()
-            end,
-            entry_maker = make_entry.gen_from_vimgrep(opts),
-            cwd = opts.cwd,
-          }
-
-          pickers.new(opts, {
-            debounce = 100,
-            prompt_title = 'Multi Grep',
-            finder = finder,
-            previewer = conf.grep_previewer(opts),
-            sorter = require('telescope.sorters').empty(),
-          }):find()
-        end
-      end,
-    },
-    {
-      'folke/tokyonight.nvim',
-      config = function()
-        vim.cmd.colorscheme 'tokyonight'
-      end,
-    },
-    {
-      'nvim-treesitter/nvim-treesitter',
-      lazy = false,
-      branch = 'main',
-      build = ':TSUpdate',
-      config = function()
-        require('nvim-treesitter').install {
-          'c',
-          'c_sharp',
-          'csv',
-          'diff',
-          'dockerfile',
-          'editorconfig',
-          'gitignore',
-          'go',
-          'gomod',
-          'gosum',
-          'html',
-          'javascript',
-          'jq',
-          'jsdoc',
-          'json',
-          'jsonc',
-          'lua',
-          'markdown',
-          'markdown_inline',
-          'powershell',
-          'psv',
-          'query',
-          'sql',
-          'toml',
-          'tsv',
-          'typescript',
-          'vim',
-          'vimdoc',
-          'xml',
-          'yaml',
-        }
-        vim.api.nvim_create_autocmd('FileType', {
-          pattern = '*',
-          callback = function(args)
-            local max_filesize = 1000000 -- 1 MB
-            local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(args.buf))
-            if ok and stats and stats.size > max_filesize then return end
-            pcall(vim.treesitter.start)
-          end,
-        })
-      end,
-    },
+local mini_pick = require('mini.pick')
+mini_pick.setup({
+  options = {
+    content_from_bottom = true,
   },
+  window = {
+    config = function()
+      -- 2/3 of the screen
+      local height = math.floor(0.66 * vim.o.lines)
+      local width = math.floor(0.66 * vim.o.columns)
+      return {
+        anchor = 'NW',
+        height = height,
+        width = width,
+        -- center window
+        row = math.floor(0.5 * (vim.o.lines - height)),
+        col = math.floor(0.5 * (vim.o.columns - width)),
+      }
+    end,
+  },
+  layout = {
+    preset = 'vertical',
+  },
+})
+vim.keymap.set("n", "<leader>fg", function() mini_pick.builtin.grep_live() end, { desc = "Multi Grep (rg)" })
+vim.keymap.set('n', '<leader>ff', function() mini_pick.builtin.files({ tool = 'fd' }) end, { desc = 'Find files' })
+vim.keymap.set('n', '<leader>fh', function() mini_pick.builtin.help() end, { desc = 'Help' })
+
+vim.cmd('colorscheme tokyonight-day')
+require('nvim-treesitter').setup({ install_dir = vim.fn.stdpath('data') .. '/site', })
+require('nvim-treesitter').install({
+  'c',
+  'c_sharp',
+  'csv',
+  'diff',
+  'dockerfile',
+  'editorconfig',
+  'gitignore',
+  'go',
+  'gomod',
+  'gosum',
+  'html',
+  'javascript',
+  'jq',
+  'jsdoc',
+  'json',
+  'lua',
+  'markdown',
+  'markdown_inline',
+  'powershell',
+  'psv',
+  'query',
+  'sql',
+  'toml',
+  'tsv',
+  'typescript',
+  'vim',
+  'vimdoc',
+  'xml',
+  'yaml',
+}):wait(300000)
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = '*',
+  callback = function(args)
+    local max_filesize = 1000000 -- 1 MB
+    local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(args.buf))
+    if ok and stats and stats.size > max_filesize then return end
+    pcall(vim.treesitter.start)
+  end,
 })
