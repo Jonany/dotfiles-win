@@ -62,15 +62,15 @@ vim.api.nvim_create_autocmd('LspAttach', {
     local client = assert(vim.lsp.get_client_by_id(args.data.client_id))
 
     -- autocomplete
-    vim.cmd [[set completeopt+=fuzzy,menuone,noselect,popup]]
+    vim.cmd [[set completeopt+=menuone,noselect,popup]]
     if client:supports_method('textDocument/completion') then
       vim.lsp.completion.enable(true, client.id, args.buf, { autotrigger = false })
     end
 
     -- inlay hints
-    if client:supports_method('textDocument/inlayHint') then
-      vim.lsp.inlay_hint.enable(true, { bufnr = args.buf, })
-    end
+    -- if client:supports_method('textDocument/inlayHint') then
+    --   vim.lsp.inlay_hint.enable(true, { bufnr = args.buf, })
+    -- end
 
     -- linkedEditingRange. ex., opening/closing tags in HTML
     if client:supports_method('textDocument/linkedEditingRange') then
@@ -211,8 +211,8 @@ vim.lsp.config['roslyn'] = {
     },
     ['csharp|completion'] = {
       dotnet_provide_regex_completions = true,
-      dotnet_show_completion_items_from_unimported_namespaces = true,
-      dotnet_show_name_completion_suggestions = true,
+      dotnet_show_completion_items_from_unimported_namespaces = false,
+      dotnet_show_name_completion_suggestions = false,
     },
     ['csharp|symbol_search'] = {
       dotnet_search_reference_assemblies = true,
