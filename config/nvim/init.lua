@@ -229,11 +229,7 @@ vim.lsp.config['tsgo'] = {
   cmd = { 'C:/Users/Jonathan.Rigsby/.bun/bin/tsgo.exe', '--lsp', '--stdio' },
   filetypes = {
     'javascript',
-    'javascriptreact',
-    'javascript.jsx',
     'typescript',
-    'typescriptreact',
-    'typescript.tsx',
   },
   settings = {
     typescript = {
@@ -254,7 +250,7 @@ vim.lsp.config['tsgo'] = {
     },
   },
   root_dir = function(bufnr, on_dir)
-    local root_markers = { 'tsconfig.json', 'package-lock.json', 'bun.lockb', 'bun.lock', '.git' }
+    local root_markers = { 'tsconfig.json', }
     -- We fallback to the current working directory if no project root is found
     local project_root = vim.fs.root(bufnr, root_markers) or vim.fn.getcwd()
     on_dir(project_root)
