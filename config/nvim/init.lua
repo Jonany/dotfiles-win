@@ -174,7 +174,7 @@ vim.lsp.config['roslyn'] = {
   -- see companion plugin 'seblyng/roslyn.nvim' below
   cmd = {
     'dotnet',
-    'C:/util/apps/usr-bin/Microsoft.CodeAnalysis.LanguageServer/content/LanguageServer/win-x64/Microsoft.CodeAnalysis.LanguageServer.dll',
+    'D:/Development/apps/usr-bin/Microsoft.CodeAnalysis.LanguageServer/content/LanguageServer/win-x64/Microsoft.CodeAnalysis.LanguageServer.dll',
     '--logLevel',              -- this property is required by the server
     'Information',
     '--extensionLogDirectory', -- this property is required by the server
