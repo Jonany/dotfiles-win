@@ -2,10 +2,3 @@
 dark = "tokyonight-night"
 light = "tokyonight-day"
 
-[mgr]
-# Hovered
-hovered         = { reversed = true }
-preview_hovered = { underline = true }
-
-# Tab
-tab_active = { reversed = true }
