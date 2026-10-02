@@ -1,5 +1,8 @@
-﻿Set-StrictMode -Version 3.0
+Set-StrictMode -Version 3.0
 
+# **********
+# * PROMPT *
+# **********
 function prompt {
     $segments = $ExecutionContext.SessionState.Path.CurrentLocation -split '\\'
     $shortSegments = @()
@@ -35,15 +38,27 @@ function prompt {
     return "`n$shortPath$gitBranch`n-> ".ToLower()
 }
 
-$env:XDG_CONFIG_HOME = "c:\util\src\etc\dotfiles-win\config"
+# *****************
+# * ENV VARIABLES *
+# *****************
+$env:XDG_CONFIG_HOME = "D:\Development\src\etc\dotfiles-win\config"
+$env:XDG_CACHE_HOME = "D:\Development\xdg\cache"
+$env:XDG_DATA_HOME = "D:\Development\xdg\data"
+$env:XDG_RUNTIME_DIR  = "D:\Development\xdg\runtime"
+$env:XDG_STATE_HOME = "D:\Development\xdg\state"
 [System.Environment]::SetEnvironmentVariable("XDG_CONFIG_HOME", $env:XDG_CONFIG_HOME, "User") # One or more batch scripts use this
+[System.Environment]::SetEnvironmentVariable("XDG_CACHE_HOME", $env:XDG_CACHE_HOME, "User")
+[System.Environment]::SetEnvironmentVariable("XDG_DATA_HOME", $env:XDG_DATA_HOME, "User")
+[System.Environment]::SetEnvironmentVariable("XDG_RUNTIME_DIR", $env:XDG_RUNTIME_DIR, "User")
+[System.Environment]::SetEnvironmentVariable("XDG_STATE_HOME", $env:XDG_STATE_HOME, "User")
+
 $env:STARSHIP_CONFIG = "$env:XDG_CONFIG_HOME\starship.toml"
 $env:EDITOR = "nvim"
 $env:RIPGREP_CONFIG_PATH="$env:XDG_CONFIG_HOME\ripgreprc"
 $env:YAZI_CONFIG_HOME = "$env:XDG_CONFIG_HOME\yazi"
 $env:YAZI_FILE_ONE = "C:\Program Files\Git\usr\bin\file.exe" # TODO: mv to adm_bin
-$env:USR_BIN = "c:\util\apps\usr-bin" # binaries installed without needing admin permissions
-$env:ADM_BIN = "c:\util\apps\bin" # binaries installed needing admin permissions
+$env:USR_BIN = "D:\Development\apps\usr-bin" # binaries installed without needing admin permissions
+$env:ADM_BIN = "D:\Development\apps\bin" # binaries installed needing admin permissions
 $env:DOTNET_CLI_TELEMETRY_OPTOUT = 1
 $env:POWERSHELL_TELEMETRY_OPTOUT = 1
 $env:POWERSHELL_UPDATECHECK_OPTOUT = 1
@@ -58,6 +73,9 @@ $env:PATH += ";$env:USR_BIN\zig"
 $env:PATH += ";C:\Program Files\7-Zip" #7z cli tool, TODO: mv to adm_bin
 $env:PATH += ";C:\Program Files\Git\usr\bin\" # Git usr utils, particularly diff
 
+# ***********
+# * ALIASES *
+# ***********
 Set-Alias -Name e -Value nvim
 Set-Alias -Name find -Value fd
 Set-Alias -Name ls -Value lsd
