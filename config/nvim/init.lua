@@ -322,6 +322,15 @@ vim.pack.add({
   { src = 'https://github.com/seblyng/roslyn.nvim', },
   { src = 'https://github.com/folke/tokyonight.nvim', },
   { src = 'https://github.com/nvim-treesitter/nvim-treesitter', version = 'main', },
+  -- debugging
+  -- { src = 'https://github.com/mfussenegger/nvim-dap', },
+  -- { src = 'https://github.com/theHamsta/nvim-dap-virtual-text', },
+  -- test runners
+  -- { src = 'https://github.com/nvim-neotest/neotest', }, --also uses nvim-treesitter
+  -- neotest deps
+  -- { src = 'https://github.com/nvim-neotest/nvim-nio', },
+  -- { src = 'https://github.com/antoinemadec/FixCursorHold.nvim', },
+  -- { src = 'https://github.com/nsidorenco/neotest-vstest', },
 })
 require('auto-dark-mode').setup({
   update_interval = 1000,
@@ -495,3 +504,36 @@ vim.api.nvim_create_autocmd('FileType', {
     pcall(vim.treesitter.start)
   end,
 })
+
+-- local dap = require('dap')
+-- dap.adapters.coreclr = {
+--   type = 'executable',
+--   command = 'D:/Development/apps/usr-bin/netcoredbg/netcoredbg.exe',
+--   args = { '--interpreter=vscode' },
+-- }
+-- dap.configurations.cs = {
+--   {
+--     type = "coreclr",
+--     name = "launch - netcoredbg",
+--     request = "launch",
+--     program = function()
+--       return vim.fn.input('Path to dll', vim.fn.getcwd() .. '/bin/Debug/', 'file')
+--     end,
+--   },
+-- }
+-- require("nvim-dap-virtual-text").setup()
+-- vim.keymap.set('n', '<leader>dbt', dap.toggle_breakpoint)
+-- vim.keymap.set('n', '<leader>dbc', dap.continue)
+-- vim.keymap.set('n', '<leader>db<Right>', dap.step_over)
+-- vim.keymap.set('n', '<leader>db<Down>', dap.step_into)
+-- vim.keymap.set('n', '<leader>db<Left>', dap.step_out)
+-- vim.keymap.set('n', '<leader>dbq', dap.terminate)
+--
+-- vim.g.neotest_vstest = {
+--   dap_settings = { type = "coreclr" },
+-- }
+-- require("neotest").setup({
+--   adapters = {
+--     require("neotest-vstest")
+--   }
+-- })
