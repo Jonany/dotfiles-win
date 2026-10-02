@@ -163,10 +163,10 @@ vim.lsp.config['dockerls'] = {
   },
 }
 
-vim.lsp.config['lua-language-server'] = {
-  cmd = { 'lua-language-server' },
-  filetypes = { 'lua' },
-  root_markers = { { '.luarc.json', '.luarc.jsonc' }, '.git' },
+vim.lsp.config['lua_ls'] = {
+  cmd = { 'lua-language-server', },
+  filetypes = { 'lua', },
+  root_markers = { { '.luarc.json', '.luarc.jsonc', }, '.git', },
   settings = {
     Lua = {
       runtime = {
@@ -178,7 +178,8 @@ vim.lsp.config['lua-language-server'] = {
           vim.env.VIMRUNTIME,
         },
       },
-      codeLens = { enable = true },
+      codeLens = { enable = true, },
+      format = { enable = true, },
     },
   },
 }
@@ -308,7 +309,7 @@ vim.lsp.config['tsgo'] = {
   end,
 }
 
-vim.lsp.enable({ 'angularls', 'azure_pipelines_ls', 'dockerls', 'lua-language-server', 'roslyn', 'tsgo', })
+vim.lsp.enable({ 'angularls', 'azure_pipelines_ls', 'dockerls', 'lua_ls', 'roslyn', 'tsgo', })
 
 -- ***********
 -- * PLUGINS *
@@ -317,6 +318,7 @@ vim.pack.add({
   { src = 'https://github.com/f-person/auto-dark-mode.nvim', },
   { src = 'https://github.com/nvim-mini/mini.statusline', },
   { src = 'https://github.com/nvim-mini/mini.pick', },
+  { src = 'https://github.com/nvim-mini/mini.extra', },
   { src = 'https://github.com/seblyng/roslyn.nvim', },
   { src = 'https://github.com/folke/tokyonight.nvim', },
   { src = 'https://github.com/nvim-treesitter/nvim-treesitter', version = 'main', },
