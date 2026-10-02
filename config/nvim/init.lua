@@ -13,7 +13,7 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 
 vim.api.nvim_create_autocmd("FileType", {
   pattern = "cs",
-  callback = function ()
+  callback = function()
     vim.bo.commentstring = "/// %s"
   end
 })
@@ -71,6 +71,7 @@ vim.env.TMP = 'D:/Development/xdg/tmp'
 -- *******
 -- * LSP *
 -- *******
+
 vim.api.nvim_create_autocmd('LspAttach', {
   callback = function(args)
     local client = assert(vim.lsp.get_client_by_id(args.data.client_id))
@@ -408,60 +409,76 @@ vim.keymap.set('n', '<leader>fh', function() mini_pick.builtin.help() end, { des
 
 MiniExtra = {} -- the setup method below creates this
 require('mini.extra').setup()
-vim.keymap.set('n', '<leader>fde', function()
-  -- https://nvim-mini.org/mini.nvim/doc/mini-extra.html#miniextra.pickers.diagnostic
-  MiniExtra.pickers.diagnostic({
-    get_opts = { severity = vim.diagnostic.severity.ERROR, },
-    scope = 'current',
-    sort_by = 'path',
-  })
-end, { desc = 'Find Errors', }
+vim.keymap.set('n', '<leader>fde',
+  function()
+    -- https://nvim-mini.org/mini.nvim/doc/mini-extra.html#miniextra.pickers.diagnostic
+    MiniExtra.pickers.diagnostic({
+      get_opts = { severity = vim.diagnostic.severity.ERROR, },
+      scope = 'current',
+      sort_by = 'path',
+    })
+  end,
+  { desc = 'Find Errors', }
 )
-vim.keymap.set('n', '<leader>fdae', function()
-  -- https://nvim-mini.org/mini.nvim/doc/mini-extra.html#miniextra.pickers.diagnostic
-  MiniExtra.pickers.diagnostic({
-    get_opts = { severity = vim.diagnostic.severity.ERROR, },
-    scope = 'all',
-    sort_by = 'path',
-  })
-end, { desc = 'Find Errors (All)', }
+vim.keymap.set('n', '<leader>fdae',
+  function()
+    -- https://nvim-mini.org/mini.nvim/doc/mini-extra.html#miniextra.pickers.diagnostic
+    MiniExtra.pickers.diagnostic({
+      get_opts = { severity = vim.diagnostic.severity.ERROR, },
+      scope = 'all',
+      sort_by = 'path',
+    })
+  end,
+  { desc = 'Find Errors (All)', }
 )
-vim.keymap.set('n', '<leader>fdw', function()
-  -- https://nvim-mini.org/mini.nvim/doc/mini-extra.html#miniextra.pickers.diagnostic
-  MiniExtra.pickers.diagnostic({
-    get_opts = { severity = vim.diagnostic.severity.WARN, },
-    scope = 'current',
-    sort_by = 'path',
-  })
-end, { desc = 'Find Warnings', }
+vim.keymap.set('n', '<leader>fdw',
+  function()
+    -- https://nvim-mini.org/mini.nvim/doc/mini-extra.html#miniextra.pickers.diagnostic
+    MiniExtra.pickers.diagnostic({
+      get_opts = { severity = vim.diagnostic.severity.WARN, },
+      scope = 'current',
+      sort_by = 'path',
+    })
+  end,
+  { desc = 'Find Warnings', }
 )
-vim.keymap.set('n', '<leader>fdaw', function()
-  -- https://nvim-mini.org/mini.nvim/doc/mini-extra.html#miniextra.pickers.diagnostic
-  MiniExtra.pickers.diagnostic({
-    get_opts = { severity = vim.diagnostic.severity.WARN, },
-    scope = 'all',
-    sort_by = 'path',
-  })
-end, { desc = 'Find Warnings (All)', }
+vim.keymap.set('n', '<leader>fdaw',
+  function()
+    -- https://nvim-mini.org/mini.nvim/doc/mini-extra.html#miniextra.pickers.diagnostic
+    MiniExtra.pickers.diagnostic({
+      get_opts = { severity = vim.diagnostic.severity.WARN, },
+      scope = 'all',
+      sort_by = 'path',
+    })
+  end,
+  { desc = 'Find Warnings (All)', }
 )
-vim.keymap.set('n', '<leader>fdi', function()
-  -- https://nvim-mini.org/mini.nvim/doc/mini-extra.html#miniextra.pickers.diagnostic
-  MiniExtra.pickers.diagnostic({
-    get_opts = { severity = vim.diagnostic.severity.INFO, },
-    scope = 'current',
-    sort_by = 'path',
-  })
-end, { desc = 'Find Info', }
+vim.keymap.set('n', '<leader>fdi',
+  function()
+    -- https://nvim-mini.org/mini.nvim/doc/mini-extra.html#miniextra.pickers.diagnostic
+    MiniExtra.pickers.diagnostic({
+      get_opts = { severity = vim.diagnostic.severity.INFO, },
+      scope = 'current',
+      sort_by = 'path',
+    })
+  end,
+  { desc = 'Find Info', }
 )
-vim.keymap.set('n', '<leader>fdh', function()
-  -- https://nvim-mini.org/mini.nvim/doc/mini-extra.html#miniextra.pickers.diagnostic
-  MiniExtra.pickers.diagnostic({
-    get_opts = { severity = vim.diagnostic.severity.HINT, },
-    scope = 'current',
-    sort_by = 'path',
-  })
-end, { desc = 'Find Hint', }
+vim.keymap.set('n', '<leader>fdh',
+  function()
+    -- https://nvim-mini.org/mini.nvim/doc/mini-extra.html#miniextra.pickers.diagnostic
+    MiniExtra.pickers.diagnostic({
+      get_opts = { severity = vim.diagnostic.severity.HINT, },
+      scope = 'current',
+      sort_by = 'path',
+    })
+  end,
+  { desc = 'Find Hint', }
 )
+
+-- TODO: Add a way to open the definition of a thing in a window instead of having
+-- to do 'grr' and then go to the de-compiled source (at least for Roslyn).
+-- vim.keymap.set('n', 'grr', function() MiniExtra.pickers.lsp({}) end, { desc = 'Find definitions', })
 
 require('nvim-treesitter').setup({ install_dir = vim.fn.stdpath('data') .. '/site', })
 require('nvim-treesitter').install({
