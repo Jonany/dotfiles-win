@@ -364,6 +364,63 @@ vim.keymap.set("n", "<leader>fg", function() mini_pick.builtin.grep_live() end, 
 vim.keymap.set('n', '<leader>ff', function() mini_pick.builtin.files({ tool = 'fd' }) end, { desc = 'Find files' })
 vim.keymap.set('n', '<leader>fh', function() mini_pick.builtin.help() end, { desc = 'Help' })
 
+MiniExtra = {} -- the setup method below creates this
+require('mini.extra').setup()
+vim.keymap.set('n', '<leader>fde', function()
+  -- https://nvim-mini.org/mini.nvim/doc/mini-extra.html#miniextra.pickers.diagnostic
+  MiniExtra.pickers.diagnostic({
+    get_opts = { severity = vim.diagnostic.severity.ERROR, },
+    scope = 'current',
+    sort_by = 'path',
+  })
+end, { desc = 'Find Errors', }
+)
+vim.keymap.set('n', '<leader>fdae', function()
+  -- https://nvim-mini.org/mini.nvim/doc/mini-extra.html#miniextra.pickers.diagnostic
+  MiniExtra.pickers.diagnostic({
+    get_opts = { severity = vim.diagnostic.severity.ERROR, },
+    scope = 'all',
+    sort_by = 'path',
+  })
+end, { desc = 'Find Errors (All)', }
+)
+vim.keymap.set('n', '<leader>fdw', function()
+  -- https://nvim-mini.org/mini.nvim/doc/mini-extra.html#miniextra.pickers.diagnostic
+  MiniExtra.pickers.diagnostic({
+    get_opts = { severity = vim.diagnostic.severity.WARN, },
+    scope = 'current',
+    sort_by = 'path',
+  })
+end, { desc = 'Find Warnings', }
+)
+vim.keymap.set('n', '<leader>fdaw', function()
+  -- https://nvim-mini.org/mini.nvim/doc/mini-extra.html#miniextra.pickers.diagnostic
+  MiniExtra.pickers.diagnostic({
+    get_opts = { severity = vim.diagnostic.severity.WARN, },
+    scope = 'all',
+    sort_by = 'path',
+  })
+end, { desc = 'Find Warnings (All)', }
+)
+vim.keymap.set('n', '<leader>fdi', function()
+  -- https://nvim-mini.org/mini.nvim/doc/mini-extra.html#miniextra.pickers.diagnostic
+  MiniExtra.pickers.diagnostic({
+    get_opts = { severity = vim.diagnostic.severity.INFO, },
+    scope = 'current',
+    sort_by = 'path',
+  })
+end, { desc = 'Find Info', }
+)
+vim.keymap.set('n', '<leader>fdh', function()
+  -- https://nvim-mini.org/mini.nvim/doc/mini-extra.html#miniextra.pickers.diagnostic
+  MiniExtra.pickers.diagnostic({
+    get_opts = { severity = vim.diagnostic.severity.HINT, },
+    scope = 'current',
+    sort_by = 'path',
+  })
+end, { desc = 'Find Hint', }
+)
+
 vim.cmd('colorscheme tokyonight-day')
 require('nvim-treesitter').setup({ install_dir = vim.fn.stdpath('data') .. '/site', })
 require('nvim-treesitter').install({
