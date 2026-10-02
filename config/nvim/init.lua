@@ -179,21 +179,60 @@ vim.lsp.config['lua-language-server'] = {
 
 vim.lsp.config['roslyn'] = {
   -- see companion plugin 'seblyng/roslyn.nvim' below
+  -- see also: https://github.com/zed-industries/zed/blob/main/docs/src/languages/csharp.md
+  -- see also: https://github.com/seblyng/roslyn.nvim
+  -- see also: https://github.com/dotnet/roslyn/blob/main/src/LanguageServer/roslyn-language-server/README.md
   cmd = {
-    'dotnet',
-    'D:/Development/apps/usr-bin/Microsoft.CodeAnalysis.LanguageServer/content/LanguageServer/win-x64/Microsoft.CodeAnalysis.LanguageServer.dll',
-    '--logLevel',              -- this property is required by the server
+    -- 'dotnet',
+    -- 'D:/Development/apps/usr-bin/Microsoft.CodeAnalysis.LanguageServer/content/LanguageServer/win-x64/Microsoft.CodeAnalysis.LanguageServer.dll',
+    -- 2026-09-29: Switching to this .NET tool. It wraps the 'Microsoft.CodeAnalysis.LanguageServer' executable and is apparently what MSFT plans to be the primary tool in future.
+    'roslyn-language-server',
+
+    -- this property is required by the server
+    '--logLevel',
     'Information',
-    '--extensionLogDirectory', -- this property is required by the server
+
+    -- this property is required by the server
+    '--extensionLogDirectory',
     vim.fs.joinpath(vim.uv.os_tmpdir(), 'roslyn_ls/logs'),
+
+    -- Allow connecting to (or starting) a shared, multi-client language server daemon instead of launching a dedicated language-server child process for that client.
+    '--daemon-mode',
+    -- How long to keep the daemon alive for after the last client disconnects. 900 seconds is the default.
+    '--daemonKeepAlive',
+    '900',
+
+    '--telemetryLevel',
+    'off',
+
+    -- Automatically discover and load projects based on workspace folders (default: false)
+    -- Invalid integer value 'false' for --autoLoadProjects.
+    -- '--autoLoadProjects',
     '--stdio',
   },
-  filetypes = { 'cs', 'csproj', 'sln', 'slnx' },
-  root_markers = { { '.csproj', '.sln', '.slnx' }, '.git' },
-  on_attach = function()
-    print('Roslyn is running')
-  end,
+  filetypes = { 'cs', 'csproj', 'sln', 'slnx', },
+  root_markers = { { '.csproj', '.sln', '.slnx', }, '.git', },
+  on_attach = function() print('Roslyn is running') end,
   settings = {
+    -- 'csharp|auto_insert.dotnet_enable_auto_insert',
+    ['csharp|background_analysis'] = {
+      -- 2026-09-29: Setting both of these to 'fullSolution' to try to get my 'fdae' and 'fdaw' commands to show all errors/warnings.
+      dotnet_analyzer_diagnostics_scope = 'fullSolution', -- openFiles|fullSolution|none
+      dotnet_compiler_diagnostics_scope = 'fullSolution', -- openFiles|fullSolution|none
+    },
+    ['csharp|code_lens'] = {
+      -- I disabled both of these because I never really found them helpful. There is no way to interact with them.
+      dotnet_enable_references_code_lens = false,
+      dotnet_enable_tests_code_lens = false,
+    },
+    ['csharp|completion'] = {
+      -- Show regular expressions in completion list.
+      dotnet_provide_regex_completions = true,
+      -- Enables support for showing unimported types and unimported extension methods in completion lists.
+      dotnet_show_completion_items_from_unimported_namespaces = false,
+      -- Perform automatic object name completion for the members that you have recently selected.
+      dotnet_show_name_completion_suggestions = false,
+    },
     ['csharp|inlay_hints'] = {
       csharp_enable_inlay_hints_for_implicit_object_creation = true,
       csharp_enable_inlay_hints_for_implicit_variable_types = true,
@@ -208,24 +247,23 @@ vim.lsp.config['roslyn'] = {
       dotnet_suppress_inlay_hints_for_parameters_that_match_argument_name = true,
       dotnet_suppress_inlay_hints_for_parameters_that_match_method_intent = true,
     },
-    ['csharp|code_lens'] = {
-      dotnet_enable_references_code_lens = true,
-      dotnet_enable_tests_code_lens = true,
+    ['csharp|navigation'] = {
+      dotnet_navigate_to_decompiled_sources = true,
+      dotnet_navigate_to_source_link_and_embedded_sources = true,
     },
-    ['csharp|background_analysis'] = {
-      dotnet_analyzer_diagnostics_scope = 'openFiles',
-      dotnet_compiler_diagnostics_scope = 'fullSolution',
-    },
-    ['csharp|completion'] = {
-      dotnet_provide_regex_completions = true,
-      dotnet_show_completion_items_from_unimported_namespaces = false,
-      dotnet_show_name_completion_suggestions = false,
+    ['csharp|formatting'] = {
+      dotnet_organize_imports_on_format = true,
     },
     ['csharp|symbol_search'] = {
       dotnet_search_reference_assemblies = true,
     },
-    ['csharp|formatting'] = {
-      dotnet_organize_imports_on_format = true,
+    ['csharp|type_members'] = {
+      -- atTheEnd: Inserts new members at the end of the type definition.
+      -- withOtherMembersOfTheSameKind: Inserts new members alongside other existing members of the same type (e.g., inserting a new property next to existing properties).
+      dotnet_member_insertion_location = 'withOtherMembersOfTheSameKind',
+
+      -- preferAutoProperties|preferThrowingProperties
+      dotnet_property_generation_behavior = 'preferAutoProperties',
     },
   },
 }
