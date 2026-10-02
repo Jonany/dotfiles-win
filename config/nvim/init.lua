@@ -65,6 +65,9 @@ vim.g.nofsync = true
 vim.cmd([[set autocomplete]])
 vim.cmd([[set completeopt+=menuone,noselect,popup]])
 
+vim.env.TEMP = 'D:/Development/xdg/tmp'
+vim.env.TMP = 'D:/Development/xdg/tmp'
+
 -- *******
 -- * LSP *
 -- *******
