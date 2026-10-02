@@ -58,6 +58,9 @@ vim.opt.clipboard = 'unnamedplus'
 vim.opt.termguicolors = true
 vim.opt.background = 'dark'
 
+vim.opt.ignorecase = true
+vim.opt.smartcase = true
+
 vim.g.nofsync = true
 vim.cmd [[set autocomplete]]
 
