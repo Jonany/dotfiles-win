@@ -372,10 +372,27 @@ mini_pick.setup({
       }
     end,
   },
-  layout = {
-    preset = 'vertical',
-  },
+  layout = { preset = 'vertical', },
+  mappings = { choose_marked = '<C-q>', },
 })
+
+vim.keymap.set('n', '<leader>fb',
+  function()
+    mini_pick.builtin.buffers({ include_current = true, }, {
+      mappings = {
+        wipeout = {
+          char = '<C-d>',
+          -- TODO: Update so that it refreshes the list
+          func = function()
+            vim.api.nvim_buf_delete(mini_pick.get_picker_matches().current.bufnr, {})
+            mini_pick.refresh()
+          end,
+        },
+      },
+    })
+  end,
+  { desc = 'Find buffers', }
+)
 vim.keymap.set("n", "<leader>fg", function() mini_pick.builtin.grep_live() end, { desc = "Multi Grep (rg)" })
 vim.keymap.set('n', '<leader>ff', function() mini_pick.builtin.files({ tool = 'fd' }) end, { desc = 'Find files' })
 vim.keymap.set('n', '<leader>fh', function() mini_pick.builtin.help() end, { desc = 'Help' })
