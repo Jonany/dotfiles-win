@@ -336,7 +336,15 @@ require('auto-dark-mode').setup({
 })
 require('roslyn').setup({
   filewatching = 'roslyn',
-  choose_target = nil,
+  choose_target = function(targets)
+    local name = vim.fs.basename(vim.fn.getcwd())
+
+    return vim.iter(targets):find(function(target)
+      return vim.fs.basename(target) == (name .. '.slnx')
+    end) or vim.iter(targets):find(function(target)
+      return vim.fs.basename(target) == (name .. '.sln')
+    end) or nil
+  end,
   ignore_target = nil,
   broad_search = false,
   lock_target = false,
